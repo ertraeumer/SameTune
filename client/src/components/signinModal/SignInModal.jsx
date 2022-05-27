@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+// import { useDispatch } from 'react-redux';
+
 
 export default function MyVerticallyCenteredModal(props) {
 
@@ -8,11 +10,20 @@ export default function MyVerticallyCenteredModal(props) {
   const [passwordInputValue, setPasswordInputValue] = useState('');
 
   // const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const signInHandler = (e) => {
     e.preventDefault();
     props.onHide();
+    navigate('/');
+    // dispatch action post request to server with user
+    // await response successful
+    // put user in redux(tokens?)
+    // reload homepage with user authorized?
+  }
 
+  const openSignUpHandler = (e) => {
+    props.onHide();
   }
 
   return (
@@ -21,6 +32,7 @@ export default function MyVerticallyCenteredModal(props) {
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
+      style={{ width: '30%', marginLeft: '33%'}}
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
@@ -39,8 +51,9 @@ export default function MyVerticallyCenteredModal(props) {
           </Form.Group>
 
           <Button type="submit" variant="dark" onClick={signInHandler}>
-            Submit
+            Sign In
           </Button>
+          <div style={{ marginTop: '3%', cursor: 'pointer'}} onClick={openSignUpHandler}>No account yet? Click here</div>
         </Form>
       </Modal.Body>
     </Modal>
