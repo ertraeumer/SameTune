@@ -1,10 +1,11 @@
 import styles from './FilterSideBar.module.css';
 
-const FilterSideBar = async () => {
+const FilterSideBar = () => {
 
   // dispatch get location values
   // dispatch get intruments values
   // dispatch get genres values
+  const options = ['bla', 'blabla', 'blablabla'];
 
   return (
     <div className={styles.sidebarContainer}>
@@ -12,9 +13,7 @@ const FilterSideBar = async () => {
         <h1>Location</h1>
         <div>
           <select>
-            <option value="">blaljkbljlkm</option>
-            <option value="">bla</option>
-            <option value="">bla</option>
+            {options.map(el => <option>{el}</option>)}
           </select>
         </div>
       </div>

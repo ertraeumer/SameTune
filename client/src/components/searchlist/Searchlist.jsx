@@ -1,4 +1,5 @@
 import FilterSideBar from '../filterSideBar/FilterSideBar';
+import InfoCard from '../infoCard/InfoCard';
 import styles from './Searchlist.module.css';
 
 const Searchlist = ({ searchvalue }) => {
@@ -7,7 +8,16 @@ const Searchlist = ({ searchvalue }) => {
       <FilterSideBar />
       <div className={styles.text}>Searchlist of {searchvalue}</div>
       <div className={styles.searchline}><input className={styles.input} type="text" placeholder='Looking for someone exact?'/></div>
-      <div className={styles.list}></div>
+      <div className={styles.list}>
+        <InfoCard />
+        <InfoCard />
+        <InfoCard />
+        <InfoCard />
+        <InfoCard />
+        <InfoCard />
+        <InfoCard />
+        <InfoCard />
+      </div>
     </div>
   );
 }

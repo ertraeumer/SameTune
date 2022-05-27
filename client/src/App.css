@@ -7,3 +7,7 @@
 .App {
   height: 100vh;
 }
+
+select {
+  width: 200px;
+}

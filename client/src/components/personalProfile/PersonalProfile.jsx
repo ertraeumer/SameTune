@@ -1,11 +1,9 @@
-import styles from './Profile.module.css';
+import styles from './PersonalProfile.module.css';
 
-// const { id, type } = useParams(); band or person + id
-
-const Profile = () => {
+const PersonalProfile = () => {
   return (
     <div className={styles.profilePage}>
-      <div className={styles.title}>Profile page</div>
+      <h1 className={styles.title}>Personal profile page</h1>
       <div className={styles.profileContainer}>
         <div className={styles.photo}>photo</div>
         <div className={styles.info}>
@@ -21,4 +19,4 @@ const Profile = () => {
   );
 }
  
-export default Profile;
+export default PersonalProfile;

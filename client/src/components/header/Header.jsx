@@ -24,7 +24,7 @@ const Header = () => {
                 <NavDropdown.Item href="#action/3.1">Invites</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Requests</NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link onClick={() => navigate(`/profile/${1}`)}>Profile</Nav.Link> (// TO DO!!!!!!!!!!!!)
+              <Nav.Link onClick={() => navigate(`/profile`)}>Profile</Nav.Link> (// TO DO!!!!!!!!!!!!)
             </Nav>
           </Navbar.Collapse>
         </Container>
