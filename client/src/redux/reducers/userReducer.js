@@ -1,12 +1,12 @@
-const REGISTER_USER = 'REGISTER_USER';
+const CHECK_AUTH = 'CHECK_AUTH';
 // const AUTHORIZE_USER = 'AUTHORIZE_USER';
 
-const defaultState = { token: []};
+const defaultState = { authUser: []};
 
 const userReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case REGISTER_USER:
-      return {...state, token: action.payload};
+    case CHECK_AUTH:
+      return {...state, authUser: action.payload};
 
     // case AUTHORIZE_USER:
     //   return null;

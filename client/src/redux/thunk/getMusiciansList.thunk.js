@@ -1,15 +1,16 @@
-import { getFilterData } from "../getFilterData";
+import { getMusiciansList } from "../actions/getMusiciansList";
+
 const PORT = 3001;
 
-export const filterData = () => {
+export const getMusiciansListThunk = () => {
 
-  let url = `http://localhost:${PORT}/api/filter`;
+  let url = `http://localhost:${PORT}`;
 
   return async function(dispatch){
     try{
       const response = await fetch(url);
       const data = await response.json();
-      dispatch(getFilterData(data));
+      dispatch(getMusiciansList(data));
     }
     catch(error){
       console.log(error.message);
