@@ -1,9 +1,13 @@
+import React from 'react';
+
 const Homepage = () => {
   return (
+    <>
     <div>
       Homepage blablabla
       <button>get started</button>
     </div>
+    </>
   );
 }
  
