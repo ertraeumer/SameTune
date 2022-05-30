@@ -1,16 +1,20 @@
+const fs = require('fs');
+
+const parsedCities = fs.readFileSync('./db/seeders/cities.txt', 'utf-8');
+
+const cities = parsedCities.trim().split('\n');
+
+const citiesForDb = [];
+
+cities.map((el) => citiesForDb.push({
+  name: el,
+  createdAt: new Date(),
+  updatedAt: new Date(),
+}));
+
 module.exports = {
   async up(queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
-    await queryInterface.bulkInsert('Locations', [
-    ], {});
+    await queryInterface.bulkInsert('Locations', citiesForDb, {});
   },
 
   async down(queryInterface, Sequelize) {
