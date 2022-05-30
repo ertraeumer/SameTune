@@ -9,26 +9,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkInsert('Instruments', [{
-      name: 'Guitar',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-    {
-      name: 'Drums',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-    {
-      name: 'Bass',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-    {
-      name: 'Triangle',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
+    await queryInterface.bulkInsert('Instruments', [
     ], {});
   },
 

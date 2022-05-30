@@ -7,7 +7,7 @@ router.get('/', async (req, res) => {
   const location = await Location.findAll({ raw: true });
   const all = [];
   all.push(genre, instrument, location);
-  console.log(all);
+  // console.log(all);
   res.json({ filter: all });
 });
 

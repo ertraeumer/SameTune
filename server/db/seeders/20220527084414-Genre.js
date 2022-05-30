@@ -9,31 +9,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkInsert('Genres', [{
-      name: 'rock',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-    {
-      name: 'rap',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-    {
-      name: 'pop',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-    {
-      name: 'folk',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-    {
-      name: 'metall',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
+    await queryInterface.bulkInsert('Genres', [
     ], {});
   },
 

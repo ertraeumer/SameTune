@@ -9,26 +9,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkInsert('Locations', [{
-      name: 'Moscow',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-    {
-      name: 'Peter',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-    {
-      name: 'Minsk',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-    {
-      name: 'Kiev',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
+    await queryInterface.bulkInsert('Locations', [
     ], {});
   },
 
