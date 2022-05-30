@@ -1,3 +1,6 @@
+const Sequelize = require('sequelize');
+
+const { Op } = Sequelize;
 const router = require('express').Router();
 const {
   User, Location, Genre, Instrument,
@@ -6,40 +9,48 @@ const {
 router.post('/', async (req, res) => {
   const { userLocation, userGenre, userInstrument } = req.body;
 
-  const returnUser = await User.findAll({
-    raw: true,
+  const foundUsers = await User.findAll({
 
     include: [
       {
         model: Location,
         attributes: ['name'],
         where: {
-          name: userLocation,
+          name: (userLocation || { [Op.like]: '%' }),
         },
       },
       {
         model: Genre,
         attributes: ['name'],
         where: {
-          name: userGenre,
+          name: (userGenre || { [Op.like]: '%' }),
         },
       },
       {
         model: Instrument,
         attributes: ['name'],
         where: {
-          name: userInstrument,
+          name: (userInstrument || { [Op.like]: '%' }),
         },
       },
     ],
   });
-  console.log(returnUser);
-  res.json({ musician: returnUser });
+
+  const result = [];
+
+  foundUsers.map((el) => result.push({
+    name: el.name,
+    phone: el.phone,
+    profile: el.profile,
+    location: el.Location.name,
+    genre: el.Genres[0].name,
+    instrument: el.Instruments[0].name,
+  }));
+  res.json({ musicians: result });
 });
 
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
-
   const musicianInfo = await User.findAll({
     where: { id },
     include: [
@@ -48,7 +59,16 @@ router.get('/:id', async (req, res) => {
       { model: Instrument, attributes: ['name'] },
     ],
   });
-  res.json({ group: musicianInfo });
+  res.json({
+    musician: {
+      name: musicianInfo[0].name,
+      phone: musicianInfo[0].phone,
+      profile: musicianInfo[0].profile,
+      location: musicianInfo[0].Location.name,
+      genre: musicianInfo[0].Genres[0].name,
+      instrument: musicianInfo[0].Instruments[0].name,
+    },
+  });
 });
 
 module.exports = router;
