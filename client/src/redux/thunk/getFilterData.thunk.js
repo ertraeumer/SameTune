@@ -1,4 +1,4 @@
-import { getFilterData } from "../actions/getFilterData";
+import { getFilterData } from "../actionCreators/getFilterData";
 
 const PORT = 3001;
 

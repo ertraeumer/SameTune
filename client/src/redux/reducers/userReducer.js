@@ -1,15 +1,15 @@
-const CHECK_AUTH = 'CHECK_AUTH';
-// const AUTHORIZE_USER = 'AUTHORIZE_USER';
+const DELETE_USER = 'DELETE_USER';
+const SET_USER = 'SET_USER';
 
-const defaultState = { authUser: []};
+const defaultState = { authUser: null };
 
 const userReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case CHECK_AUTH:
+    case SET_USER:
       return {...state, authUser: action.payload};
 
-    // case AUTHORIZE_USER:
-    //   return null;
+    case DELETE_USER:
+      return {...state, authUser: null};
 
     default:
       return state;
