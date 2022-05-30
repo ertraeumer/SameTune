@@ -1,13 +1,57 @@
 const router = require('express').Router();
+const Sequelize = require('sequelize');
 const {
-  Group, Location, Genre, User, UserGroup,
+  Group, Location, Genre, User, Instrument,
 } = require('../../db/models');
 
-router.post('/', async (req, res) => {
-  const { groupName } = req.body;
+const { Op } = Sequelize;
 
-  const returnGroup = await Group.findAll({ where: { name: groupName } });
-  res.json({ group: returnGroup });
+router.post('/', async (req, res) => {
+  const { groupGenre, groupLocation, groupInstrument } = req.body;
+
+  const returnGroup = await Group.findAll({
+    include: [
+      {
+        model: Genre,
+        attributes: ['name'],
+        where: {
+          name: (groupGenre || { [Op.like]: '%' }),
+        },
+      },
+      {
+        model: Location,
+        attributes: ['name'],
+        where: {
+          name: (groupLocation || { [Op.like]: '%' }),
+        },
+      },
+      {
+        model: Instrument,
+        attributes: ['name'],
+        where: {
+          name: (groupInstrument || { [Op.like]: '%' }),
+        },
+      },
+      {
+        model: User,
+        attributes: ['name'],
+      },
+    ],
+  });
+
+  const result = [];
+
+  returnGroup.map((el) => result.push({
+    name: el.name,
+    genre: el.Genre.name,
+    location: el.Location.name,
+    owner: el.Users[0].name,
+    photo: el.photo,
+    description: el.description,
+    requiredInstrument: el.Instruments[0].name,
+  }));
+
+  res.json({ group: result });
 });
 
 router.get('/:id', async (req, res) => {
@@ -18,10 +62,22 @@ router.get('/:id', async (req, res) => {
     include: [
       { model: Location, attributes: ['name'] },
       { model: Genre, attributes: ['name'] },
-      { model: User },
+      { model: User, attributes: ['name'] },
+      { model: Instrument, attributes: ['name'] },
     ],
   });
-  res.json({ group: groupInfo });
+
+  res.json({
+    group: {
+      name: groupInfo[0].name,
+      genre: groupInfo[0].Genre.name,
+      location: groupInfo[0].Location.name,
+      owner: groupInfo[0].Users[0].name,
+      photo: groupInfo[0].photo,
+      description: groupInfo[0].description,
+      requiredInstrument: groupInfo[0].Instruments[0].name,
+    },
+  });
 });
 
 module.exports = router;
