@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate({
-      Instrument, Genre, Group, Invite, Location,
+      Instrument, Genre, Group, Invite, Location, Token,
     }) {
       // define association here
       this.belongsToMany(Instrument, { through: 'UserInstrument', foreignKey: 'instrumentId' });
@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(Invite, { foreignKey: 'toUserId' });
       this.belongsTo(Location, { foreignKey: 'locationId' });
       this.hasMany(Group, { foreignKey: 'ownerId' });
+      this.hasOne(Token, { foreignKey: 'userId' });
     }
   }
   User.init({
