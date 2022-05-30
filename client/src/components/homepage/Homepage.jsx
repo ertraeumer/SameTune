@@ -19,7 +19,10 @@ const Homepage = () => {
         show={modalShow}
         onHide={() => {
           setModalShow(false);
-          setModal2Show(true)
+        }}
+        togglesignup={() => {
+          setModalShow(false);
+          setModal2Show(true);
         }}
       />
       <MyVerticallyCenteredModal2
@@ -29,5 +32,5 @@ const Homepage = () => {
     </div>
   );
 }
- 
+
 export default Homepage;

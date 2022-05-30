@@ -1,13 +1,12 @@
 const router = require('express').Router();
 const {
   Group, Location, Genre, User, UserGroup,
-} = require('../db/models');
+} = require('../../db/models');
 
 router.post('/', async (req, res) => {
   const { groupName } = req.body;
 
   const returnGroup = await Group.findAll({ where: { name: groupName } });
-  console.log(returnGroup);
   res.json({ group: returnGroup });
 });
 

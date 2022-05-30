@@ -18,9 +18,8 @@ export const signUp = (payload, navigate) => {
       if (response.ok) {
         const user = await response.json();
         dispatch(setUser(user));
-        navigate('/');
       } else {
-        navigate('/auth/signup');
+        navigate('/bands');
       }
     }
     catch(error){
@@ -29,7 +28,7 @@ export const signUp = (payload, navigate) => {
   }
 };
 
-export const signIn = (payload, navigate, from) => {
+export const signIn = (payload, navigate) => {
 
   return async function(dispatch){
     try{
@@ -44,9 +43,8 @@ export const signIn = (payload, navigate, from) => {
       if (response.ok) {
         const user = await response.json();
         dispatch(setUser(user));
-        navigate(from);
       } else {
-        navigate('/auth/signin');
+        navigate('/bands');
       }
     }
     catch(error){

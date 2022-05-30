@@ -1,16 +1,22 @@
 import { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { signUp } from '../../redux/thunk/userActions.thunk';
 
 export default function MyVerticallyCenteredModal2(props) {
 
   const [emailInputValue2, setEmailInputValue2] = useState('');
   const [passwordInputValue2, setPasswordInputValue2] = useState('');
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const signUpHandler = (e) => {
     e.preventDefault();
+    dispatch(signUp({ email: emailInputValue2, password: passwordInputValue2 }, navigate));
     props.onHide();
-    
-  }
+  };
 
   return (
     <Modal
