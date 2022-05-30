@@ -1,3 +1,17 @@
+const fs = require('fs');
+
+const parsedInstruments = fs.readFileSync('./db/seeders/instruments.txt', 'utf-8');
+
+const instruments = parsedInstruments.trim().split('\n');
+
+const instrumentsForDb = [];
+
+instruments.map((el) => instrumentsForDb.push({
+  name: el,
+  createdAt: new Date(),
+  updatedAt: new Date(),
+}));
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     /**
@@ -9,27 +23,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkInsert('Instruments', [{
-      name: 'Guitar',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-    {
-      name: 'Drums',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-    {
-      name: 'Bass',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-    {
-      name: 'Triangle',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-    ], {});
+    await queryInterface.bulkInsert('Instruments', instrumentsForDb, {});
   },
 
   async down(queryInterface, Sequelize) {
