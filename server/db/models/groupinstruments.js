@@ -1,9 +1,9 @@
-'use strict';
 const {
-  Model
+  Model,
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
-  class GroupInstruments extends Model {
+  class GroupInstrument extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,12 +13,12 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  GroupInstruments.init({
+  GroupInstrument.init({
     instrumentId: DataTypes.INTEGER,
-    groupId: DataTypes.INTEGER
+    groupId: DataTypes.INTEGER,
   }, {
     sequelize,
-    modelName: 'GroupInstruments',
+    modelName: 'GroupInstrument',
   });
-  return GroupInstruments;
+  return GroupInstrument;
 };
