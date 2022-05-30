@@ -1,5 +1,6 @@
 const initState = () => ({
   authUser: null,
+  filterData: [],
 });
 
 // const getInitState = () => {

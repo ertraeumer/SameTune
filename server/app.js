@@ -41,5 +41,5 @@ app.use('/users', usersRouter);
 app.use('/api/musicians', musiciansRouter);
 
 app.listen(PORT, () => {
-  console.log('Server started on PORT ', PORT);
+  console.log('Server started on PORT', PORT);
 });

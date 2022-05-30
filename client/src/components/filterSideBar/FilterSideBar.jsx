@@ -1,11 +1,21 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getFilterDataThunk } from '../../redux/thunk/getFilterData.thunk';
 import styles from './FilterSideBar.module.css';
 
 const FilterSideBar = () => {
 
-  // dispatch get location values
-  // dispatch get intruments values
-  // dispatch get genres values
-  const options = ['bla', 'blabla', 'blablabla'];
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getFilterDataThunk());
+  }, [])
+
+  const info = useSelector(state => state.filterData);
+
+  const optionsGenre = info.filter[0];
+  const optionsInstrument = info.filter[1];
+  const optionsLocation = info.filter[2];
 
   return (
     <div className={styles.sidebarContainer}>
@@ -13,7 +23,7 @@ const FilterSideBar = () => {
         <h1>Location</h1>
         <div>
           <select>
-            {options.map(el => <option>{el}</option>)}
+            {optionsLocation?.sort().map(el => <option>{el.name}</option>)}
           </select>
         </div>
       </div>
@@ -21,9 +31,7 @@ const FilterSideBar = () => {
         <h1>Instrument</h1>
         <div>
           <select>
-            <option value="">blaljkbljlkm</option>
-            <option value="">bla</option>
-            <option value="">bla</option>
+            {optionsInstrument?.map(el => <option>{el.name}</option>)}
           </select>
         </div>
       </div>
@@ -31,9 +39,7 @@ const FilterSideBar = () => {
         <h1>Genre</h1>
         <div>
           <select>
-            <option value="">blaljkbljlkm</option>
-            <option value="">bla</option>
-            <option value="">bla</option>
+            {optionsGenre?.map(el => <option>{el.name}</option>)}
           </select>
         </div>
       </div>

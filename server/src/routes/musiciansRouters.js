@@ -4,7 +4,7 @@ const { Op } = Sequelize;
 const router = require('express').Router();
 const {
   User, Location, Genre, Instrument,
-} = require('../db/models');
+} = require('../../db/models');
 
 router.post('/', async (req, res) => {
   const { userLocation, userGenre, userInstrument } = req.body;

@@ -1,11 +1,11 @@
+import initState from "../initState";
+
 const GET_FILTER_DATA = 'GET_FILTER_DATA';
 
-const defaultState = { filterData: {filter: [[], [], []]}};
-
-const filterDataReducer = (state = defaultState, action) => {
+const filterDataReducer = (state = initState(), action) => {
   switch (action.type) {
     case GET_FILTER_DATA:
-      return {...state, filterData: action.payload};
+      return action.payload;
 
     default:
       return state;
