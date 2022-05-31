@@ -1,0 +1,32 @@
+.homepageContainer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.homepageWelcome {
+  height: 50%;
+  width: 60%;
+  margin-bottom: 15%;
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.homepageButton {
+  width: 50%;
+  color: white;
+  background-color: #212529;
+  border-radius: 10px;
+  height: 10%;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 5%;
+}
+
+.h1 {
+  font-size: 4rem;
+  margin-bottom: 4rem;
+}

@@ -44,6 +44,7 @@ router.post('/', async (req, res) => {
       phone: el.phone,
       profile: el.profile,
       location: el.Location.name,
+      photo: el.photo,
       genre: el.Genres[0].name,
       instrument: el.Instruments[0].name,
     }));
@@ -69,6 +70,7 @@ router.get('/:id', async (req, res) => {
         name: musicianInfo[0].name,
         phone: musicianInfo[0].phone,
         profile: musicianInfo[0].profile,
+        photo: musicianInfo[0].photo,
         location: musicianInfo[0].Location.name,
         genre: musicianInfo[0].Genres[0].name,
         instrument: musicianInfo[0].Instruments[0].name,
