@@ -1,0 +1,15 @@
+.infocardContainer {
+  display: flex;
+  justify-content: space-around;
+  border: 1px solid black;
+  width: 93%;
+  border-radius: 5px;
+  height: 8rem;
+  margin-bottom: 5%;
+}
+
+.block {
+  border: 1px solid black;
+  width: 30%;
+}
+
