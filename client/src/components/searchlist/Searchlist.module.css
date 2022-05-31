@@ -1,0 +1,23 @@
+.searchline {
+  margin-top: 2%;
+}
+
+.input {
+  margin-left: 25%;
+  margin-bottom: 3%;
+  width: 40%;
+  height: 50px;
+  border-radius: 5px;
+}
+
+.text {
+  margin-left: 25%;
+  font-size: 4rem;
+}
+
+.list {
+  margin-left: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}

@@ -25,6 +25,9 @@ module.exports = {
       profile: {
         type: Sequelize.TEXT,
       },
+      photo: {
+        type: Sequelize.TEXT,
+      },
       locationId: {
         type: Sequelize.INTEGER,
         references: {
