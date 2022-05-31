@@ -3,7 +3,7 @@
 }
 
 .input {
-  margin-left: 25%;
+  margin-left: 20%;
   margin-bottom: 3%;
   width: 40%;
   height: 50px;
@@ -11,12 +11,12 @@
 }
 
 .text {
-  margin-left: 25%;
+  padding-left: 20%;
   font-size: 4rem;
 }
 
 .list {
-  margin-left: 25%;
+  padding-left: 20%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

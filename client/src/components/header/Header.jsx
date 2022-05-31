@@ -9,7 +9,7 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { authUser } = useSelector(state => state.user);
+  const { authUser } = useSelector(state => state);
 
   return (
     <div className={styles.headerContainer}>

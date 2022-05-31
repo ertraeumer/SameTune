@@ -6,7 +6,7 @@ import userReducer from "./userReducer";
 
 const rootReducer = combineReducers({
   filterData: filterDataReducer,
-  user: userReducer,
+  authUser: userReducer,
   bands: bandsReducer,
   musicians: musiciansReducer
 })

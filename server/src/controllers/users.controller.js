@@ -11,7 +11,7 @@ const editUser = async (req, res) => {
         plain: true,
         raw: true,
       });
-      return res.json(updatedUser);
+      return res.json({ updatedUser });
     } catch (error) {
       return res.sendStatus(500);
     }

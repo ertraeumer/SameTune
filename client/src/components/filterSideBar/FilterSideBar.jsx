@@ -23,6 +23,7 @@ const FilterSideBar = () => {
         <h1>Location</h1>
         <div>
           <select>
+            <option></option>
             {optionsLocation?.sort().map(el => <option>{el.name}</option>)}
           </select>
         </div>
@@ -31,6 +32,7 @@ const FilterSideBar = () => {
         <h1>Instrument</h1>
         <div>
           <select>
+            <option></option>
             {optionsInstrument?.map(el => <option>{el.name}</option>)}
           </select>
         </div>
@@ -39,6 +41,7 @@ const FilterSideBar = () => {
         <h1>Genre</h1>
         <div>
           <select>
+            <option></option>
             {optionsGenre?.map(el => <option>{el.name}</option>)}
           </select>
         </div>

@@ -105,7 +105,6 @@ export const editUser = (user, navigate) => {
       if (response.ok) {
         const userData = await response.json();
         dispatch(setUser(userData));
-        navigate(`/users/${userData.id}`);
       } else {
         navigate.replace('/');
       }

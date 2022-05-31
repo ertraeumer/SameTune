@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt');
 
-const { User, Location } = require('../../db/models');
+const {
+  User, Location, Genre, Instrument, Group,
+} = require('../../db/models');
 
 const signUp = async (req, res) => {
   const { email, password } = req.body;
@@ -35,10 +37,52 @@ const signIn = async (req, res) => {
           email: currentUser.email,
         };
         try {
-          const location = await Location.findByPk(currentUser.locationId);
-          return res.json({ ...currentUser.dataValues, location: location.name });
+          const currentUserInfo = await User.findAll({
+
+            where: {
+              id: currentUser.id,
+            },
+
+            include: [
+              {
+                model: Location,
+                attributes: ['name'],
+              },
+              {
+                model: Genre,
+                attributes: ['name'],
+              },
+              {
+                model: Instrument,
+                attributes: ['name'],
+              },
+              {
+                model: Group,
+                attributes: ['name'],
+              },
+            ],
+            raw: true,
+          });
+
+          const genres = [...new Set(currentUserInfo.map((el) => el['Genres.name']))];
+          const instruments = [...new Set(currentUserInfo.map((el) => el['Instruments.name']))];
+          const groups = [...new Set(currentUserInfo.map((el) => el['Groups.name']))];
+          const location = currentUserInfo[0]['Location.name'];
+
+          return res.json({
+            ...currentUser.dataValues,
+            location,
+            genres,
+            instruments,
+            groups,
+          });
         } catch (error) {
-          return res.json({ ...currentUser.dataValues, location: null });
+          return res.json({
+            ...currentUser.dataValues,
+            location: null,
+            intruments: null,
+            genres: null,
+          });
         }
       }
       return res.sendStatus(401);

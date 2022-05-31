@@ -1,6 +1,6 @@
 .sidebarContainer {
   height: 93%; /* Full-height: remove this if you want "auto" height */
-  width: 20%; /* Set the width of the sidebar */
+  width: 15%; /* Set the width of the sidebar */
   position: fixed; /* Fixed Sidebar (stay in place on scroll) */
   z-index: 1; /* Stay on top */
   bottom: 0; /* Stay at the top */
@@ -16,7 +16,7 @@
 }
 
 .mleft {
-  margin-left: 15%;
-  margin-bottom: 10%;
+  padding-left: 5%;
+  padding-bottom: 10%;
   font-size: 1rem;
 }

@@ -1,9 +1,9 @@
+import initState from "../initState";
+
 const GET_MUSICIANS_LIST = 'GET_MUSICIANS_LIST';
 const GET_MUSICIAN_CARD = 'GET_MUSICIAN_CARD';
 
-const defaultState = { bandsList: []};
-
-const bandsReducer = (state = defaultState, action) => {
+const bandsReducer = (state = initState(), action) => {
   switch (action.type) {
     case GET_MUSICIANS_LIST:
       return {...state, musiciansList: action.payload};

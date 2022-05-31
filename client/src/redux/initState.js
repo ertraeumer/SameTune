@@ -1,6 +1,8 @@
 const initState = () => ({
-  authUser: null,
+  authUser: null, // localStorage.getItem('userData') || null,
   filterData: [],
+  bands: [],
+  musicians: [],
 });
 
 // const getInitState = () => {
