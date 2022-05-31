@@ -9,10 +9,12 @@ router.post('/', upload.single('img'), async (req, res, next) => {
   const { id } = req.body;
 
   if (req.file.originalname) {
-    await User.update({ photo: `public/images/${req.file.originalname}` }, { where: { id } });
+    console.log('upload!');
+    console.log(User);
+    await User.update({ photo: `images/${req.file.originalname}` }, { where: { id } });
   }
 
-  const returnPhoto = await User.findByPk(id).photo;
+  const returnPhoto = await User.findByPk(id);
   res.json({ photo: returnPhoto });
 });
 
