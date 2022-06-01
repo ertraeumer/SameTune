@@ -9,7 +9,6 @@ const filterRouter = require('./routes/filterRouters');
 const bandsRouter = require('./routes/bandsRouters');
 const musiciansRouter = require('./routes/musiciansRouters');
 const musicianPhotoRouter = require('./routes/musicianPhotoRouter');
-const bandPhotoRouter = require('./routes/bandPhotoRouter');
 const bandAddProfileRouter = require('./routes/bandAddProfileRouter');
 
 app.use(express.json());
@@ -25,7 +24,6 @@ app.use('/api/filter', filterRouter);
 app.use('/api/bands', bandsRouter);
 app.use('/api/musicians', musiciansRouter);
 app.use('/api/userProfile/addphoto', musicianPhotoRouter);
-app.use('/api/bandProfile/addphoto', bandPhotoRouter);
 app.use('/api/addBand', bandAddProfileRouter);
 
 app.listen(PORT, () => {
