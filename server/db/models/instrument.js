@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.belongsToMany(User, { through: 'UserInstrument', foreignKey: 'instrumentId' });
       this.belongsToMany(Group, { through: 'GroupInstrument', foreignKey: 'instrumentId' });
-      this.hasMany(Invite, { foreignKey: 'instrumentId' });
+      this.hasMany(Invite, { foreignKey: 'instId' });
     }
   }
   Instrument.init({

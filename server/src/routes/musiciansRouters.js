@@ -65,7 +65,7 @@ router.get('/:id', async (req, res) => {
         { model: Instrument, attributes: ['name'] },
       ],
     });
-    res.json({
+    return res.json({
       musician: {
         name: musicianInfo[0].name,
         phone: musicianInfo[0].phone,
@@ -77,7 +77,7 @@ router.get('/:id', async (req, res) => {
       },
     });
   } catch (error) {
-    res.status(503).send('Get-запрос не удался :(');
+    return res.status(503).send('Get-запрос не удался');
   }
 });
 

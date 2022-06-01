@@ -15,7 +15,7 @@ const Main = () => {
 
   useEffect(() => {
     dispatch(getFilterDataThunk());
-  }, [])
+  }, []);
 
   return (
     <div style={{marginTop:'0px'}} className={styles.mainContainer}>

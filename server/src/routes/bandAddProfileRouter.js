@@ -1,29 +1,39 @@
 const router = require('express').Router();
 const {
-  Group, Genre, Location, User,
+  Group, Genre, Location, Instrument, GroupInstrument,
 } = require('../../db/models');
 const upload = require('../middlewares/multerMiddleWare');
 
 router.post('/', upload.single('img'), async (req, res) => {
   const {
-    name, description, genre, location,
+    name, description, genre, location, instrument,
   } = req.body;
+  // console.log(req.session);
   try {
     const genreId = await Genre.findAll({ where: { name: genre } });
     const locationId = await Location.findAll({ where: { name: location } });
+    const instrumentId = await Instrument.findAll({ where: { name: instrument } });
 
-    // let newGroup;
+    console.log('req.session-->', req.session);
 
     // if (req.file?.originalname) {
-    await Group.create({
+    const newGroup = await Group.create({
       name,
       description,
-      photo: `images/${req.file?.originalname}`,
+      // photo: `images/${req.file?.originalname}`,
       genreId: genreId[0].dataValues.id,
       locationId: locationId[0].dataValues.id,
       ownerId: req.session.user.id,
     });
     // }
+
+    if (newGroup) {
+      await GroupInstrument.create({
+        instrumentId: instrumentId[0].dataValues.id,
+        groupId: newGroup.dataValues.id,
+
+      });
+    }
 
     const returnGroup = {
       name,
@@ -31,13 +41,13 @@ router.post('/', upload.single('img'), async (req, res) => {
       photo: `images/${req.file?.originalname}`,
       genre,
       location,
-      owner: User.findByPk(req.session.user.id),
+      owner: req.session.user.id,
     };
 
     res.json({ group: returnGroup });
   } catch (error) {
     console.log(error);
-    res.status(500).end();
+    res.status(500).send('add profile router error');
   }
 });
 

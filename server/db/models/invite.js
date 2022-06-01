@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(User, { foreignKey: 'fromUserId' });
       this.belongsTo(Group, { foreignKey: 'toGroupId' });
       this.belongsTo(User, { foreignKey: 'toUserId' });
-      this.belongsTo(Instrument, { foreignKey: 'instrumentId' });
+      this.belongsTo(Instrument, { foreignKey: 'instId' });
     }
   }
   Invite.init({

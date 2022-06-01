@@ -37,20 +37,21 @@ router.post('/', async (req, res) => {
           attributes: ['name'],
         },
       ],
+      raw: true,
     });
-    console.log(returnGroup);
+
     const result = [];
 
     returnGroup.map((el) => result.push({
       name: el.name,
-      genre: el.Genre.name,
-      location: el.Location.name,
-      owner: el.Users[0].name,
+      genre: el['Genre.name'],
+      location: el['Location.name'],
+      owner: el.ownerId,
       photo: el.photo,
       description: el.description,
-      requiredInstrument: el.Instruments[0].name,
+      requiredInstrument: el['Instruments.name'],
     }));
-    console.log(result);
+
     res.json({ group: returnGroup });
   } catch (error) {
     res.status(503).send('Не прокатило!');
