@@ -15,6 +15,7 @@ const usersRouter = require('./src/routes/usersRouter');
 const musiciansRouter = require('./src/routes/musiciansRouters');
 const intrumentsRouter = require('./src/routes/instrumentsRouter');
 const bandAddProfileRouter = require('./src/routes/bandAddProfileRouter');
+const inviteRouter = require('./src/routes/inviteRouter');
 
 const musicianPhotoRouter = require('./src/routes/musicianPhotoRouter');
 
@@ -47,6 +48,7 @@ app.use('/instruments', intrumentsRouter);
 app.use('/api/musicians', musiciansRouter);
 app.use('/api/userProfile/addphoto', musicianPhotoRouter);
 app.use('/api/addBand', bandAddProfileRouter);
+app.use('/api/inviteToGroup', inviteRouter);
 
 app.listen(PORT, () => {
   console.log('Server started on PORT', PORT);
