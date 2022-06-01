@@ -53,7 +53,7 @@ export const signIn = (payload) => {
         }
         else {
           const user = result;
-          dispatch(setStatus('Успешно'));
+          dispatch(setStatus('Вход выполнен успешно'));
           dispatch(setUser(user));
         }
       } else {

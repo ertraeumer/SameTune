@@ -10,6 +10,8 @@ const PersonalProfile = () => {
   const authUser = useSelector(state => state.authUser);
   const info = useSelector(state => state.filterData);
 
+  console.log(authUser);
+
   const dispatch = useDispatch();
 
   const [editableName, setEditableName] = useState(false);
@@ -116,10 +118,10 @@ const PersonalProfile = () => {
               </div>
             </ListGroup.Item>
             <ListGroup.Item style={{ paddingTop: 0, paddingBottom: 0 }}>
-              <div className={styles.nameBox}>
-                <div className={styles.prop}></div>
+              <div className={styles?.nameBox}>
+                <div className={styles?.prop}></div>
                 <div></div>
-                <div className={styles.edit}></div>
+                <div className={styles?.edit}></div>
               </div>
               Preferable Genres: {authUser?.genres[0] ? authUser.genres.join(', ') : 'No Information Provided'}
             </ListGroup.Item>
