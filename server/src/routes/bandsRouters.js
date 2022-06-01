@@ -2,7 +2,7 @@ const router = require('express').Router();
 const Sequelize = require('sequelize');
 const {
   Group, Location, Genre, User, Instrument,
-} = require('../db/models');
+} = require('../../db/models');
 
 const { Op } = Sequelize;
 

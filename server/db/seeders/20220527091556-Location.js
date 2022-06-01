@@ -7,7 +7,7 @@ const cities = parsedCities.trim().split('\n');
 const citiesForDb = [];
 
 cities.map((el) => citiesForDb.push({
-  name: el,
+  name: el.trim(),
   createdAt: new Date(),
   updatedAt: new Date(),
 }));
