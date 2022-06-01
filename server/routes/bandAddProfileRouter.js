@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const session = require('express-session');
 const {
   Group, Genre, Location, User,
 } = require('../db/models');
@@ -13,7 +14,6 @@ router.post('/', upload.single('img'), async (req, res) => {
     const genreId = await Genre.findAll({ where: { name: genre } });
     const locationId = await Location.findAll({ where: { name: location } });
     const ownerId = await User.findAll({ where: { name: owner } });
-
 
     let newGroup;
 
