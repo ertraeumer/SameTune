@@ -71,7 +71,6 @@ router.get('/:id', async (req, res) => {
         { model: Instrument, attributes: ['name'] },
       ],
     });
-    // console.log(typeof groupInfo);
 
     res.json({
       group: {

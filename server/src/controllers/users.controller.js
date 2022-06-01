@@ -1,17 +1,83 @@
-const { User } = require('../../db/models');
+const {
+  User, Genre, Instrument, Group, Location,
+} = require('../../db/models');
 
 const editUser = async (req, res) => {
   let updatedFields = Object.entries(req.body).filter((el) => el[1]);
   if (updatedFields.length) {
     updatedFields = Object.fromEntries(updatedFields);
+    let updatedUser;
     try {
-      const [, updatedUser] = await User.update(updatedFields, {
-        where: { id: req.session.user.id },
-        returning: true,
-        plain: true,
+      if ('name' in updatedFields || 'profile' in updatedFields || 'phone' in updatedFields) {
+        [, updatedUser] = await User.update(updatedFields, {
+          where: {
+            id: req.session.user.id,
+          },
+          returning: true,
+          plain: true,
+          raw: true,
+        });
+      }
+
+      if ('location' in updatedFields) {
+        const newLocation = await Location.findOne({
+          where: {
+            name: updatedFields.location,
+          },
+        });
+        [, updatedUser] = await User.update({ locationId: newLocation.id }, {
+          where: {
+            id: req.session.user.id,
+          },
+          returning: true,
+          plain: true,
+          raw: true,
+        });
+      }
+
+      const currentUserInfo = await User.findAll({
+
+        where: {
+          id: req.session.user.id,
+        },
+
+        include: [
+          {
+            model: Location,
+            attributes: ['name'],
+          },
+          {
+            model: Genre,
+            attributes: ['name'],
+          },
+          {
+            model: Instrument,
+            attributes: ['name'],
+          },
+          {
+            model: Group,
+            attributes: ['name'],
+          },
+        ],
         raw: true,
       });
-      return res.json({ updatedUser });
+
+      const genres = [...new Set(currentUserInfo.map((el) => el['Genres.name']))];
+      const instruments = [...new Set(currentUserInfo.map((el) => el['Instruments.name']))];
+      const groups = [...new Set(currentUserInfo.map((el) => el['Groups.name']))];
+      const location = currentUserInfo[0]['Location.name'];
+
+      const userToReturn = {
+        ...updatedUser,
+        genres,
+        instruments,
+        groups,
+        location,
+      };
+
+      delete userToReturn.password;
+
+      return res.json({ ...userToReturn });
     } catch (error) {
       return res.sendStatus(500);
     }
@@ -22,8 +88,53 @@ const editUser = async (req, res) => {
 const getUser = async (req, res) => {
   const { id } = req.params;
   try {
-    const currentUser = await User.findByPk(id);
-    res.json(currentUser);
+    const currentUserInfo = await User.findAll({
+
+      where: {
+        id,
+      },
+
+      include: [
+        {
+          model: Location,
+          attributes: ['name'],
+        },
+        {
+          model: Genre,
+          attributes: ['name'],
+        },
+        {
+          model: Instrument,
+          attributes: ['name'],
+        },
+        {
+          model: Group,
+          attributes: ['name'],
+        },
+      ],
+      raw: true,
+    });
+
+    const genres = [...new Set(currentUserInfo.map((el) => el['Genres.name']))];
+    const instruments = [...new Set(currentUserInfo.map((el) => el['Instruments.name']))];
+    const groups = [...new Set(currentUserInfo.map((el) => el['Groups.name']))];
+    const location = currentUserInfo[0]['Location.name'];
+
+    const gotUser = {
+      id: currentUserInfo[0].id,
+      name: currentUserInfo[0].name,
+      email: currentUserInfo[0].email,
+      phone: currentUserInfo[0].phone,
+      profile: currentUserInfo[0].profile,
+      genres,
+      instruments,
+      groups,
+      location,
+    };
+
+    delete gotUser.password;
+
+    return res.json({ ...gotUser });
   } catch (error) {
     res.sendStatus(500);
   }

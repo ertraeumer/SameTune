@@ -1,37 +1,45 @@
 const router = require('express').Router();
 const session = require('express-session');
 const {
-  Group, Genre, Location, User,
+  Group, Genre, Location, Instrument, GroupInstrument,
 } = require('../../db/models');
-const upload = require('../middleWares/multerMiddleWare');
+const upload = require('../middlewares/multerMiddleWare');
 
 router.post('/', upload.single('img'), async (req, res) => {
   const {
-    name, description, genre, location,
+    name, description, genre, location, instrument,
   } = req.body;
-  console.log({ file: req.file, body: req.body });
+  // console.log(req.session);
   try {
     const genreId = await Genre.findAll({ where: { name: genre } });
     const locationId = await Location.findAll({ where: { name: location } });
-
-    let newGroup;
+    const instrumentId = await Instrument.findAll({ where: { name: instrument } });
 
     console.log('req.session-->', req.session);
 
-    if (req.file?.originalname) {
-      newGroup = await Group.create({
-        name,
-        description,
-        photo: `images/${req.file?.originalname}`,
-        genreId: genreId[0].dataValues.id,
-        locationId: locationId[0].dataValues.id,
-        ownerId: req.session.user.id,
+    // if (req.file?.originalname) {
+    const newGroup = await Group.create({
+      name,
+      description,
+      // photo: `images/${req.file?.originalname}`,
+      genreId: genreId[0].dataValues.id,
+      locationId: locationId[0].dataValues.id,
+      ownerId: req.session.user.id,
+    });
+    // }
+
+    let newGroupInst;
+    if (newGroup) {
+      newGroupInst = await GroupInstrument.create({
+        instrumentId: instrumentId[0].dataValues.id,
+        groupId: newGroup.dataValues.id,
+
       });
     }
 
-    console.log('newGroup ---> ', newGroup);
-    const newGroupId = newGroup.dataValues.id;
-    console.log('newGroupId---> ', newGroupId);
+    console.log('newGroupInst ---> ', newGroupInst);
+    const nnewGroupInstId = newGroupInst.dataValues.id;
+    console.log('newGroupInst---> ', newGroupInst);
 
     const returnGroup = {
       name,
@@ -39,13 +47,13 @@ router.post('/', upload.single('img'), async (req, res) => {
       photo: `images/${req.file?.originalname}`,
       genre,
       location,
-      owner: User.findByPk(req.session.user.id),
+      owner: req.session.user.id,
     };
 
     res.json({ group: returnGroup });
   } catch (error) {
     console.log(error);
-    res.status(500).end();
+    res.status(500).send('add profile router error');
   }
 });
 
