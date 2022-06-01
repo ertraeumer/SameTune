@@ -3,7 +3,7 @@ const session = require('express-session');
 const {
   Group, Genre, Location, User,
 } = require('../../db/models');
-const upload = require('../middleWares/multerMiddleWare');
+const upload = require('../middlewares/multerMiddleWare');
 
 router.post('/', upload.single('img'), async (req, res) => {
   const {

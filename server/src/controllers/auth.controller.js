@@ -16,7 +16,7 @@ const signUp = async (req, res) => {
         email: newUser.email,
       };
 
-      return res.json({ id: newUser.id, email: newUser.email });
+      return res.json({ id: newUser.id, email: newUser.email, status: 'OK' });
     } catch (error) {
       return res.sendStatus(500);
     }
@@ -26,17 +26,25 @@ const signUp = async (req, res) => {
 
 const signIn = async (req, res) => {
   const { password, email } = req.body;
-
+  if (!email) {
+    return res.json({ status: 'EmptyEmailFieldFailure' });
+  }
+  if (!password) {
+    return res.json({ status: 'EmptyPassFieldFailure' });
+  }
   if (password && email) {
     try {
       const currentUser = await User.findOne({ where: { email } });
+      console.log(currentUser);
       const compareResult = await bcrypt.compare(password, currentUser.password);
       if (currentUser && compareResult) {
+        console.log('req ses');
         req.session.user = {
           id: currentUser.id,
           email: currentUser.email,
         };
         try {
+          console.log('sec try');
           const currentUserInfo = await User.findAll({
 
             where: {
@@ -69,24 +77,35 @@ const signIn = async (req, res) => {
           const groups = [...new Set(currentUserInfo.map((el) => el['Groups.name']))];
           const location = currentUserInfo[0]['Location.name'];
 
-          return res.json({
+          const userToReturn = {
             ...currentUser.dataValues,
             location,
             genres,
             instruments,
             groups,
-          });
+          };
+
+          delete userToReturn.password;
+          console.log('usr t rt');
+
+          return res.json({ ...userToReturn, status: 'OK' });
         } catch (error) {
-          return res.json({
+          const userToReturn = {
             ...currentUser.dataValues,
             location: null,
             intruments: null,
             genres: null,
-          });
+            groups: null,
+          };
+
+          delete userToReturn.password;
+
+          return res.json({ ...userToReturn, status: 'OK' });
         }
       }
       return res.sendStatus(401);
     } catch (error) {
+      console.log(error);
       return res.sendStatus(500);
     }
   }

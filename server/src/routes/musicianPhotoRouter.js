@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const upload = require('../middleWares/multerMiddleWare');
+const upload = require('../middlewares/multerMiddleWare');
 const { User } = require('../../db/models');
 
 router.post('/', upload.single('img'), async (req, res, next) => {
