@@ -13,5 +13,7 @@ export const createBand = () => `${host}/api/addBand`;
 
 export const getBandsList = () => `${host}/api/bands`;
 
+export const getFilterDataThunk = () => `${host}/api/filter`;
+
 
 //прописать корректные пути ручек
