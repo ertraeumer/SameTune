@@ -10,13 +10,6 @@ const Searchlist = ({ searchvalue }) => {
       <div className={styles.searchline}><input className={styles.input} type="text" placeholder='Looking for someone exact?'/></div>
       <div className={styles.list}>
         <InfoCard />
-        <InfoCard />
-        <InfoCard />
-        <InfoCard />
-        <InfoCard />
-        <InfoCard />
-        <InfoCard />
-        <InfoCard />
       </div>
     </div>
   );

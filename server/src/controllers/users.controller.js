@@ -75,6 +75,24 @@ const editUser = async (req, res) => {
         location,
       };
 
+      if (userToReturn.instruments.length === 1) {
+        if (userToReturn.instruments[0] === null) {
+          userToReturn.instruments = null;
+        }
+      }
+
+      if (userToReturn.genres.length === 1) {
+        if (userToReturn.genres[0] === null) {
+          userToReturn.genres = null;
+        }
+      }
+
+      if (userToReturn.groups.length === 1) {
+        if (userToReturn.groups[0] === null) {
+          userToReturn.groups = null;
+        }
+      }
+
       delete userToReturn.password;
 
       return res.json({ ...userToReturn });

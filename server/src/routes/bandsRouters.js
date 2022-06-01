@@ -8,7 +8,6 @@ const { Op } = Sequelize;
 
 router.post('/', async (req, res) => {
   const { groupGenre, groupLocation, groupInstrument } = req.body;
-
   try {
     const returnGroup = await Group.findAll({
       include: [
@@ -39,7 +38,7 @@ router.post('/', async (req, res) => {
         },
       ],
     });
-
+    console.log(returnGroup);
     const result = [];
 
     returnGroup.map((el) => result.push({
@@ -51,7 +50,7 @@ router.post('/', async (req, res) => {
       description: el.description,
       requiredInstrument: el.Instruments[0].name,
     }));
-
+    console.log(result);
     res.json({ group: returnGroup });
   } catch (error) {
     res.status(503).send('Не прокатило!');

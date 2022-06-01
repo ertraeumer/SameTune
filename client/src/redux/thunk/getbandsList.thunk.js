@@ -1,14 +1,17 @@
-import { getBandsList } from "../actions/getBandsList";
+import * as endPoints from '../../config/endPoints';
+import { getBandsList } from "../actionCreators/getBandsList";
 
-const PORT = 3001;
-
-export const getBandsListThunk = () => {
-
-  let url = `http://localhost:${PORT}`;
-
+export const getBandsListThunk = (groupGenre, groupLocation, groupInstrument) => {
   return async function(dispatch){
     try{
-      const response = await fetch(url);
+      const response = await fetch('http://localhost:3001/api/bands', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({ groupGenre, groupLocation, groupInstrument }),
+      });
       const data = await response.json();
       dispatch(getBandsList(data));
     }
