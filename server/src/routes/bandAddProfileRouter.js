@@ -7,15 +7,16 @@ const upload = require('../middleWares/multerMiddleWare');
 
 router.post('/', upload.single('img'), async (req, res) => {
   const {
-    name, description, genre, location, owner,
+    name, description, genre, location,
   } = req.body;
   console.log({ file: req.file, body: req.body });
   try {
     const genreId = await Genre.findAll({ where: { name: genre } });
     const locationId = await Location.findAll({ where: { name: location } });
-    const ownerId = await User.findAll({ where: { name: owner } });
 
     let newGroup;
+
+    console.log('req.session-->', req.session);
 
     if (req.file?.originalname) {
       newGroup = await Group.create({
@@ -24,7 +25,7 @@ router.post('/', upload.single('img'), async (req, res) => {
         photo: `images/${req.file?.originalname}`,
         genreId: genreId[0].dataValues.id,
         locationId: locationId[0].dataValues.id,
-        ownerId: ownerId[0].dataValues.id,
+        ownerId: req.session.user.id,
       });
     }
 
@@ -32,39 +33,13 @@ router.post('/', upload.single('img'), async (req, res) => {
     const newGroupId = newGroup.dataValues.id;
     console.log('newGroupId---> ', newGroupId);
 
-    // const returnGroup = await Group.findByPk(newGroupId, {
-    //   include: [
-    //     {
-    //       model: Genre,
-    //       attributes: ['name'],
-    //       where: {
-    //         name: genre,
-    //       },
-    //     },
-    //     {
-    //       model: Location,
-    //       attributes: ['name'],
-    //       where: {
-    //         name: location,
-    //       },
-    //     },
-    //     {
-    //       model: User,
-    //       attributes: ['name'],
-    //       where: {
-    //         name: owner,
-    //       },
-    //     },
-    //   ],
-    // });
-
     const returnGroup = {
       name,
       description,
       photo: `images/${req.file?.originalname}`,
       genre,
       location,
-      owner,
+      owner: User.findByPk(req.session.user.id),
     };
 
     res.json({ group: returnGroup });
