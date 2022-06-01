@@ -3,6 +3,7 @@ const initState = () => ({
   filterData: [],
   bands: [],
   musicians: [],
+  authStatus: '',
 });
 
 // const getInitState = () => {

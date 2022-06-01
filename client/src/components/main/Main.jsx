@@ -8,7 +8,7 @@ import styles from './Main.module.css';
 const Main = () => {
 
   return (
-    <div className={styles.mainContainer}>
+    <div style={{marginTop:'0px'}}className={styles.mainContainer}>
       <Routes>
         <Route path="/home" element={<Homepage />}/>
         <Route path="/bands" element={<Searchlist searchvalue='Bands'/>}/>
