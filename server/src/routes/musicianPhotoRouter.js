@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const upload = require('../middleWares/multerMiddleWare');
-const { Group } = require('../db/models');
+const { User } = require('../../db/models');
 
 router.post('/', upload.single('img'), async (req, res, next) => {
   console.log('req.file -->', req.file?.originalname);
@@ -9,10 +9,10 @@ router.post('/', upload.single('img'), async (req, res, next) => {
   const { id } = req.body;
 
   if (req.file.originalname) {
-    await Group.update({ photo: `images/${req.file.originalname}` }, { where: { id } });
+    await User.update({ photo: `images/${req.file.originalname}` }, { where: { id } });
   }
 
-  const returnPhoto = await Group.findByPk(id);
+  const returnPhoto = await User.findByPk(id);
   res.json({ photo: returnPhoto });
 });
 

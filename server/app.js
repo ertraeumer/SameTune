@@ -6,11 +6,11 @@ const session = require('express-session')
 const app = express();
 
 const PORT = process.env.DB_PORT ?? 3001;
-const filterRouter = require('./routes/filterRouters');
-const bandsRouter = require('./routes/bandsRouters');
-const musiciansRouter = require('./routes/musiciansRouters');
-const musicianPhotoRouter = require('./routes/musicianPhotoRouter');
-const bandAddProfileRouter = require('./routes/bandAddProfileRouter');
+const filterRouter = require('./src/routes/filterRouters');
+const bandsRouter = require('./src/routes/bandsRouters');
+const musiciansRouter = require('./src/routes/musiciansRouters');
+const musicianPhotoRouter = require('./src/routes/musicianPhotoRouter');
+const bandAddProfileRouter = require('./src/routes/bandAddProfileRouter');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
