@@ -1,4 +1,5 @@
 import { deleteUser, setUser } from "../actionCreators/userActions";
+import { setStatus } from "../actionCreators/authStatus";
 import * as endPoints from '../../config/endPoints';
 
 export const signUp = (payload, navigate) => {
@@ -29,6 +30,7 @@ export const signUp = (payload, navigate) => {
 export const signIn = (payload) => {
 
   return async function(dispatch){
+    dispatch(setStatus(''));
     try{
       const response = await fetch(endPoints.signIn(), {
         method: 'POST',
@@ -39,8 +41,19 @@ export const signIn = (payload) => {
         body: JSON.stringify(payload),
       });
       if (response.ok) {
-        const user = await response.json();
-        dispatch(setUser(user));
+        const result = await response.json();
+        console.log(result);
+        if (result.status === 'EmptyEmailFieldFailure'){
+          dispatch(setStatus('Поле e-mail пустое'));
+        }
+        else if (result.status === 'EmptyPassFieldFailure') {
+          dispatch(setStatus('Поле пароля пустое'));
+        }
+        else {
+          const user = result;
+          dispatch(setStatus('Успешно'));
+          dispatch(setUser(user));
+        }
       } else {
         console.log('error in sign in thunk');
       }
@@ -59,6 +72,7 @@ export const signOut = () => {
       });
       if (response.ok) {
         dispatch(deleteUser());
+        dispatch(setStatus(''));
       }
     }
     catch(error){

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { signIn } from '../../redux/thunk/userActions.thunk';
 
@@ -12,11 +12,29 @@ export default function MyVerticallyCenteredModal({ onHide, togglesignup, show }
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const authStatus = useSelector(state => state.authStatus);
+  //let statusColor = 'green';
 
   const signInHandler = (e) => {
     e.preventDefault();
     dispatch(signIn({ email, password }, navigate));
-    onHide();
+    console.log(authStatus)
+    if (authStatus){
+      console.log('success');
+      onHide();
+    }
+    // else if (authStatus === 'Поле e-mail пустое'){
+    //   statusColor = 'red';
+    //   console.log(authStatus)
+    // }
+    // else if (authStatus === 'Поле пароля пустое'){
+    //   statusColor = 'red';
+    //   console.log(authStatus)
+    // }
+    console.log(authStatus);
+    // dispatch action post request to server with user
+    // await response successful
+    // put user in redux(tokens?)
   }
 
   const openSignUpHandler = (e) => {
@@ -47,7 +65,7 @@ export default function MyVerticallyCenteredModal({ onHide, togglesignup, show }
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
           </Form.Group>
-
+          <div style={{'marginBottom': '10px'}} type="auth-status">{authStatus}</div>
           <Button type="submit" variant="dark" onClick={signInHandler}>
             Sign In
           </Button>

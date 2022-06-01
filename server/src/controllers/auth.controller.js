@@ -6,6 +6,12 @@ const {
 
 const signUp = async (req, res) => {
   const { email, password } = req.body;
+  if (!email) {
+    return res.json({ status: 'EmptyEmailFieldFailure' });
+  }
+  if (!password) {
+    return res.json({ status: 'EmptyPassFieldFailure' });
+  }
   const hash = await bcrypt.hash(password, 6);
   if (email && password) {
     try {
@@ -16,7 +22,7 @@ const signUp = async (req, res) => {
         email: newUser.email,
       };
 
-      return res.json({ id: newUser.id, email: newUser.email });
+      return res.json({ id: newUser.id, email: newUser.email, status: 'OK' });
     } catch (error) {
       return res.sendStatus(500);
     }
@@ -26,7 +32,12 @@ const signUp = async (req, res) => {
 
 const signIn = async (req, res) => {
   const { password, email } = req.body;
-
+  if (!email) {
+    return res.json({ status: 'EmptyEmailFieldFailure' });
+  }
+  if (!password) {
+    return res.json({ status: 'EmptyPassFieldFailure' });
+  }
   if (password && email) {
     try {
       const currentUser = await User.findOne({ where: { email } });
@@ -79,7 +90,7 @@ const signIn = async (req, res) => {
 
           delete userToReturn.password;
 
-          return res.json({ ...userToReturn });
+          return res.json({ ...userToReturn, status: 'OK' });
         } catch (error) {
           const userToReturn = {
             ...currentUser.dataValues,
@@ -91,7 +102,7 @@ const signIn = async (req, res) => {
 
           delete userToReturn.password;
 
-          return res.json({ ...userToReturn });
+          return res.json({ ...userToReturn, status: 'OK' });
         }
       }
       return res.sendStatus(401);
