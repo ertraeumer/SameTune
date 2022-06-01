@@ -69,20 +69,29 @@ const signIn = async (req, res) => {
           const groups = [...new Set(currentUserInfo.map((el) => el['Groups.name']))];
           const location = currentUserInfo[0]['Location.name'];
 
-          return res.json({
+          const userToReturn = {
             ...currentUser.dataValues,
             location,
             genres,
             instruments,
             groups,
-          });
+          };
+
+          delete userToReturn.password;
+
+          return res.json({ ...userToReturn });
         } catch (error) {
-          return res.json({
+          const userToReturn = {
             ...currentUser.dataValues,
             location: null,
             intruments: null,
             genres: null,
-          });
+            groups: null,
+          };
+
+          delete userToReturn.password;
+
+          return res.json({ ...userToReturn });
         }
       }
       return res.sendStatus(401);

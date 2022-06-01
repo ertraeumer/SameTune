@@ -20,10 +20,10 @@
 .info {
   width: 60%;
   border: 1px solid black;
-  height: 96%;
+  min-height: 96%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: flex-start;
 }
 
 .title {
@@ -38,6 +38,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+}
+
+.listBox {
+  min-height: 4rem;
   position: relative;
 }
 

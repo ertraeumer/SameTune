@@ -7,7 +7,7 @@ const instruments = parsedInstruments.trim().split('\n');
 const instrumentsForDb = [];
 
 instruments.map((el) => instrumentsForDb.push({
-  name: el,
+  name: el.trim(),
   createdAt: new Date(),
   updatedAt: new Date(),
 }));

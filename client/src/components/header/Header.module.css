@@ -2,4 +2,5 @@
   height: 7%;
   position: fixed;
   width: 100%;
+  z-index: 1;
 }

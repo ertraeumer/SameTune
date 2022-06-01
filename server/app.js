@@ -13,6 +13,7 @@ const bandsRouter = require('./src/routes/bandsRouters');
 const authRouter = require('./src/routes/authRouters');
 const usersRouter = require('./src/routes/usersRouter');
 const musiciansRouter = require('./src/routes/musiciansRouters');
+const intrumentsRouter = require('./src/routes/instrumentsRouter');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -39,6 +40,7 @@ app.use('/api/bands', bandsRouter);
 app.use('/api/auth', authRouter);
 app.use('/users', usersRouter);
 app.use('/api/musicians', musiciansRouter);
+app.use('/instruments', intrumentsRouter);
 
 app.listen(PORT, () => {
   console.log('Server started on PORT', PORT);

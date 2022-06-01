@@ -8,7 +8,6 @@ router.get('/', async (req, res) => {
     const location = await Location.findAll({ raw: true });
     const all = [];
     all.push(genre, instrument, location);
-    console.log(all);
     res.json({ filter: all });
   } catch (error) {
     res.status(501).send('Everything is very bad');

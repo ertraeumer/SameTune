@@ -1,8 +1,6 @@
 import { deleteUser, setUser } from "../actionCreators/userActions";
 import * as endPoints from '../../config/endPoints';
 
-
-
 export const signUp = (payload, navigate) => {
 
   return async function(dispatch){
@@ -28,7 +26,7 @@ export const signUp = (payload, navigate) => {
   }
 };
 
-export const signIn = (payload, navigate) => {
+export const signIn = (payload) => {
 
   return async function(dispatch){
     try{
@@ -44,7 +42,7 @@ export const signIn = (payload, navigate) => {
         const user = await response.json();
         dispatch(setUser(user));
       } else {
-        navigate('/bands');
+        console.log('error in sign in thunk');
       }
     }
     catch(error){
@@ -90,23 +88,23 @@ export const getUserFromServer = (id) => {
   }
 };
 
-export const editUser = (user, navigate) => {
+export const editUser = (newValues) => {
   return async function(dispatch, getState){
     try{
-      const { user: { id: userId }, } = getState();
-      const response = await fetch(endPoints.editUser(userId), {
+      const { authUser } = getState();
+      const response = await fetch(endPoints.editUser(authUser.id), {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
         credentials: 'include',
-        body: JSON.stringify(user),
+        body: JSON.stringify(newValues),
       });
       if (response.ok) {
         const userData = await response.json();
         dispatch(setUser(userData));
       } else {
-        navigate.replace('/');
+        console.log('error in edit user thunk');
       }
     }
     catch(error){

@@ -7,7 +7,7 @@ const genres = parsedGenres.trim().split('\n');
 const genresForDb = [];
 
 genres.map((el) => genresForDb.push({
-  name: el,
+  name: el.trim(),
   createdAt: new Date(),
   updatedAt: new Date(),
 }));

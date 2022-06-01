@@ -1,15 +1,7 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getFilterDataThunk } from '../../redux/thunk/getFilterData.thunk';
+import { useSelector } from 'react-redux';
 import styles from './FilterSideBar.module.css';
 
 const FilterSideBar = () => {
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getFilterDataThunk());
-  }, [])
 
   const info = useSelector(state => state.filterData);
 
@@ -24,7 +16,7 @@ const FilterSideBar = () => {
         <div>
           <select>
             <option></option>
-            {optionsLocation?.sort().map(el => <option>{el.name}</option>)}
+            {optionsLocation?.map(el => <option>{el.name}</option>)}
           </select>
         </div>
       </div>

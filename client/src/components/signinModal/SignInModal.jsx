@@ -17,9 +17,6 @@ export default function MyVerticallyCenteredModal({ onHide, togglesignup, show }
     e.preventDefault();
     dispatch(signIn({ email, password }, navigate));
     onHide();
-    // dispatch action post request to server with user
-    // await response successful
-    // put user in redux(tokens?)
   }
 
   const openSignUpHandler = (e) => {
