@@ -6,12 +6,6 @@ const {
 
 const signUp = async (req, res) => {
   const { email, password } = req.body;
-  if (!email) {
-    return res.json({ status: 'EmptyEmailFieldFailure' });
-  }
-  if (!password) {
-    return res.json({ status: 'EmptyPassFieldFailure' });
-  }
   const hash = await bcrypt.hash(password, 6);
   if (email && password) {
     try {
@@ -41,13 +35,16 @@ const signIn = async (req, res) => {
   if (password && email) {
     try {
       const currentUser = await User.findOne({ where: { email } });
+      console.log(currentUser);
       const compareResult = await bcrypt.compare(password, currentUser.password);
       if (currentUser && compareResult) {
+        console.log('req ses');
         req.session.user = {
           id: currentUser.id,
           email: currentUser.email,
         };
         try {
+          console.log('sec try');
           const currentUserInfo = await User.findAll({
 
             where: {
@@ -89,6 +86,7 @@ const signIn = async (req, res) => {
           };
 
           delete userToReturn.password;
+          console.log('usr t rt');
 
           return res.json({ ...userToReturn, status: 'OK' });
         } catch (error) {
@@ -107,6 +105,7 @@ const signIn = async (req, res) => {
       }
       return res.sendStatus(401);
     } catch (error) {
+      console.log(error);
       return res.sendStatus(500);
     }
   }

@@ -13,10 +13,10 @@ const Homepage = () => {
   // }, [currentUserId]);
 
   return (
-    <div className={styles.homepageContainer} style={{backgroundImage: `url(${background})`, backgroundPosition: '30% 40%' }}>
+    <div className={styles.homepageContainer} style={{ height: '107%', marginTop: '-3.2%',backgroundImage: `url(${background})`, backgroundPosition: '30% 40%' }}>
       <div style={{marginTop: '250px', marginBottom: '50px', padding: '30px'}} className={styles.homepageWelcome}>
         <h1 className={styles.h1}>Hi there and welcome to the SameTune!</h1>
-        <p>Here you've got an option to find a variety of musicians for your band or join one. Looking for a party? Right place you've gone to. Let's go?</p>
+        <p>Here you've got an option to find a variety of musicians for your band or join one. Looking for a party? Right place you've come to. Let's go?</p>
       </div>
       <button className={styles.homepageButton} onClick={() => setModalShow(true)}>GET STARTED</button>
       <MyVerticallyCenteredModal

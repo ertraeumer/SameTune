@@ -90,7 +90,7 @@ const PersonalProfile = () => {
                 <div className={styles.prop}>Instruments I Play:</div>
                 <div>
                   <ul style={{ marginRight: '3rem' }}>
-                    {authUser?.instruments[0] ? authUser?.instruments.map((el) => <li key={Math.trunc(Math.random() * 1000)}>{el}</li>) : 'No information provided'}
+                    {authUser?.instruments ? authUser?.instruments.map((el) => <li key={Math.trunc(Math.random() * 1000)}>{el}</li>) : 'No information provided'}
                     {editableInstruments ? (
                       <li>
                         { instrumentToAdd ? (

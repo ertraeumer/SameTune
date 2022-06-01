@@ -1,6 +1,6 @@
 import { getFilterData } from "../actionCreators/getFilterData";
 
-const PORT = 3002;
+const PORT = 3001;
 
 export const getFilterDataThunk = () => {
 
