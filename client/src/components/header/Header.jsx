@@ -1,10 +1,16 @@
+import { useState } from 'react';
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { signOut } from '../../redux/thunk/userActions.thunk';
+import MyVerticallyCenteredModal from '../signinModal/SignInModal';
+import MyVerticallyCenteredModal2 from '../signupModal/signUpModal';
 import styles from './Header.module.css';
 
 const Header = () => {
+
+  const [modalShow, setModalShow] = useState(false);
+  const [modal2Show, setModal2Show] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -33,10 +39,25 @@ const Header = () => {
               </Nav>
             ) : (
               <Nav>
-                <Nav.Link>Sign In</Nav.Link>
-                <Nav.Link>Sign Up</Nav.Link>
+                <Nav.Link onClick={() => setModalShow(true)}>Sign In</Nav.Link>
+                <Nav.Link onClick={() => setModal2Show(true)}>Sign Up</Nav.Link>
               </Nav>
             )}
+            <MyVerticallyCenteredModal
+              show={modalShow}
+              onHide={() => {
+                setModalShow(false);
+              }}
+              togglesignup={() => {
+                setModalShow(false);
+                setModal2Show(true);
+              }}
+              noAccountButton="notVisible"
+            />
+            <MyVerticallyCenteredModal2
+              show={modal2Show}
+              onHide={() => setModal2Show(false)}
+            />
           </Navbar.Collapse>
         </Container>
       </Navbar>
