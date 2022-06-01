@@ -9,8 +9,6 @@ router.post('/', upload.single('img'), async (req, res, next) => {
   const { id } = req.body;
 
   if (req.file.originalname) {
-    console.log('upload!');
-    console.log(Group);
     await Group.update({ photo: `images/${req.file.originalname}` }, { where: { id } });
   }
 
