@@ -16,7 +16,16 @@ const signUp = async (req, res) => {
         email: newUser.email,
       };
 
-      return res.json({ id: newUser.id, email: newUser.email, status: 'OK' });
+      return res.json({
+        id: newUser.id,
+        email: newUser.email,
+        status: 'OK',
+        phone: null,
+        location: null,
+        intruments: null,
+        genres: null,
+        groups: null,
+      });
     } catch (error) {
       return res.sendStatus(500);
     }
@@ -38,13 +47,11 @@ const signIn = async (req, res) => {
       console.log(currentUser);
       const compareResult = await bcrypt.compare(password, currentUser.password);
       if (currentUser && compareResult) {
-        console.log('req ses');
         req.session.user = {
           id: currentUser.id,
           email: currentUser.email,
         };
         try {
-          console.log('sec try');
           const currentUserInfo = await User.findAll({
 
             where: {
@@ -86,7 +93,6 @@ const signIn = async (req, res) => {
           };
 
           delete userToReturn.password;
-          console.log('usr t rt');
 
           return res.json({ ...userToReturn, status: 'OK' });
         } catch (error) {

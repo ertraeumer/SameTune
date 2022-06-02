@@ -32,7 +32,6 @@ export const signIn = (payload) => {
   return async function(dispatch){
     dispatch(setStatus(''));
     try{
-      console.log('req on route');
       console.log(endPoints.signIn());
       const response = await fetch(endPoints.signIn(), {
         method: 'POST',
@@ -44,7 +43,6 @@ export const signIn = (payload) => {
       });
       if (response.ok) {
         const result = await response.json();
-        console.log(result);
         if (result.status === 'EmptyEmailFieldFailure'){
           dispatch(setStatus('Поле e-mail пустое'));
         }
@@ -53,7 +51,7 @@ export const signIn = (payload) => {
         }
         else {
           const user = result;
-          dispatch(setStatus('Успешно'));
+          dispatch(setStatus('Вход выполнен успешно'));
           dispatch(setUser(user));
         }
       } else {

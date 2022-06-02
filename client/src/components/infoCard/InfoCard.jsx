@@ -1,16 +1,17 @@
 import styles from './InfoCard.module.css';
 
-const InfoCard = (props) => {
+const InfoCard = ({ band }) => {
+  console.log(band);
   return (
     <div className={styles.infocardContainer}>
-      <div className={styles.block}>фото</div>
+      <div className={styles.block}>{band.photo}</div>
       <div className={styles.block}>
-        <div>название</div>
-        <div>инструмент</div>
+        <div>{band.name}</div>
+        <div>{band['Instruments.name']}</div>
       </div>
       <div className={styles.block}>
-        <div>место</div>
-        <div>жанр</div>
+        <div>{band['Location.name']}</div>
+        <div>{band['Genre.name']}</div>
       </div>
     </div>
   );

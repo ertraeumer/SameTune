@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { ListGroup } from 'react-bootstrap';
+import { Button, ListGroup } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { addInstrument } from '../../redux/thunk/instruments.thunk';
-import { editUser, getUserFromServer } from '../../redux/thunk/userActions.thunk';
+import { editUser } from '../../redux/thunk/userActions.thunk';
 import styles from './PersonalProfile.module.css';
 
 const PersonalProfile = () => {
@@ -10,7 +11,10 @@ const PersonalProfile = () => {
   const authUser = useSelector(state => state.authUser);
   const info = useSelector(state => state.filterData);
 
+  console.log(authUser);
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [editableName, setEditableName] = useState(false);
   const [name, setName] = useState('');
@@ -47,7 +51,10 @@ const PersonalProfile = () => {
     <div className={styles.profilePage}>
       <h1 className={styles.title}>Personal profile page</h1>
       <div className={styles.profileContainer}>
-        <div className={styles.photo}>photo</div>
+        <div className={styles.boxwithphotobutton}>
+          <div className={styles.photo}>photo</div>
+          <div><Button variant='dark' style={{ fontSize: '2rem' }} onClick={() => navigate('/newband')}>Создать группу</Button></div>
+        </div>
         <div className={styles.info}>
           <ListGroup>
             <ListGroup.Item style={{ paddingTop: 0, paddingBottom: 0 }}>
@@ -73,7 +80,7 @@ const PersonalProfile = () => {
                       <div className={styles.content}>
                         <select value={location} onChange={(e) => setLocation(e.target.value)} >
                           <option key='first'></option>
-                          {info.filter[2].map((el) => {
+                          {info?.filter[2].map((el) => {
                             if (el.name !== authUser.location) return <option key={el.id}>{el.name}</option>
                           })}
                         </select>
@@ -88,23 +95,23 @@ const PersonalProfile = () => {
             <ListGroup.Item style={{ paddingTop: 0, paddingBottom: 0 }}>
               <div className={styles.nameBox}>
                 <div className={styles.prop}>Instruments I Play:</div>
-                <div>
+                <div style={{ width: '30%' }}>
                   <ul style={{ marginRight: '3rem' }}>
                     {authUser?.instruments ? authUser?.instruments.map((el) => <li key={Math.trunc(Math.random() * 1000)}>{el}</li>) : 'No information provided'}
                     {editableInstruments ? (
                       <li>
                         { instrumentToAdd ? (
-                          <select style={{ width: '7.6rem'}} value={instrumentToAdd} onChange={(e) => setInstrumentToAdd(e.target.value)}>
+                          <select style={{ width: '7.6rem', marginRight: 0 }} value={instrumentToAdd} onChange={(e) => setInstrumentToAdd(e.target.value)}>
                             <option value='' disabled hidden>Выбор</option>
-                            {info.filter[1].map((el) => {
-                              if (authUser.instruments.indexOf(el.name) === -1) return <option key={el.id}>{el.name}</option>
+                            {info?.filter[1].map((el) => {
+                              if (true) return <option key={el.id}>{el.name}</option>
                             })}
                           </select>
                         ) : (
                           <select style={{ width: '7.6rem'}} value={''} onChange={(e) => setInstrumentToAdd(e.target.value)}>
                             <option value='' disabled hidden>Выбор</option>
-                            {info.filter[1].map((el) => {
-                              if (authUser.instruments.indexOf(el.name) === -1) return <option key={el.id}>{el.name}</option>
+                            {info?.filter[1].map((el) => {
+                              if (true) return <option key={el.id}>{el.name}</option>
                             })}
                           </select>
                         )}
@@ -116,12 +123,12 @@ const PersonalProfile = () => {
               </div>
             </ListGroup.Item>
             <ListGroup.Item style={{ paddingTop: 0, paddingBottom: 0 }}>
-              <div className={styles.nameBox}>
-                <div className={styles.prop}></div>
+              <div className={styles?.nameBox}>
+                <div className={styles?.prop}></div>
                 <div></div>
-                <div className={styles.edit}></div>
+                <div className={styles?.edit}></div>
               </div>
-              Preferable Genres: {authUser?.genres[0] ? authUser.genres.join(', ') : 'No Information Provided'}
+              Preferable Genres: {authUser?.genres ? authUser.genres.join(', ') : 'No Information Provided'}
             </ListGroup.Item>
             <ListGroup.Item style={{ paddingTop: 0, paddingBottom: 0 }}>
               <div className={styles.nameBox}>
@@ -137,7 +144,7 @@ const PersonalProfile = () => {
                 <div></div>
                 <div className={styles.edit}></div>
               </div>
-              My Bands: {authUser?.groups[0] ? authUser.groups.join(', ') : 'No Information Provided'}
+              My Bands: {authUser?.groups ? authUser.groups.join(', ') : 'No Information Provided'}
             </ListGroup.Item>
             <ListGroup.Item style={{ paddingTop: 0, paddingBottom: 0 }}>
               <div className={styles.nameBox}>

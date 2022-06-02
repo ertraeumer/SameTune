@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import MyVerticallyCenteredModal from '../signinModal/SignInModal';
 import MyVerticallyCenteredModal2 from '../signupModal/signUpModal';
 import styles from './Homepage.module.css';
@@ -7,10 +7,6 @@ import background from '../../../src/img/L1007565-WEB_3.jpeg';
 const Homepage = () => {
   const [modalShow, setModalShow] = useState(false);
   const [modal2Show, setModal2Show] = useState(false);
-
-  // useEffect(() => {
-
-  // }, [currentUserId]);
 
   return (
     <div className={styles.homepageContainer} style={{ height: '107%', marginTop: '-3.2%',backgroundImage: `url(${background})`, backgroundPosition: '30% 40%' }}>

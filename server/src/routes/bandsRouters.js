@@ -8,9 +8,9 @@ const { Op } = Sequelize;
 
 router.post('/', async (req, res) => {
   const { groupGenre, groupLocation, groupInstrument } = req.body;
-
   try {
     const returnGroup = await Group.findAll({
+
       include: [
         {
           model: Genre,
@@ -38,18 +38,19 @@ router.post('/', async (req, res) => {
           attributes: ['name'],
         },
       ],
+      raw: true,
     });
 
     const result = [];
 
     returnGroup.map((el) => result.push({
       name: el.name,
-      genre: el.Genre.name,
-      location: el.Location.name,
-      owner: el.Users[0].name,
+      genre: el['Genre.name'],
+      location: el['Location.name'],
+      owner: el.ownerId,
       photo: el.photo,
       description: el.description,
-      requiredInstrument: el.Instruments[0].name,
+      requiredInstrument: el['Instruments.name'],
     }));
 
     res.json({ group: returnGroup });

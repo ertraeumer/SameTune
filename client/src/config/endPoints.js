@@ -8,7 +8,12 @@ export const checkAuth = () => `${host}/api/auth/check`;
 export const editUser = (id) => `${host}/users/${id}`;
 export const getUser = (id) => `${host}/users/${id}`;
 
-export const addInstrument = () => `${host}/instruments/add`
+export const addInstrument = () => `${host}/instruments/add`;
+export const createBand = () => `${host}/api/addBand`;
+
+export const getBandsList = () => `${host}/api/bands`;
+
+export const getFilterDataThunk = () => `${host}/api/filter`;
 
 
 //прописать корректные пути ручек

@@ -35,6 +35,7 @@ router.post('/', async (req, res) => {
           },
         },
       ],
+      raw: true,
     });
 
     const result = [];
@@ -43,12 +44,12 @@ router.post('/', async (req, res) => {
       name: el.name,
       phone: el.phone,
       profile: el.profile,
-      location: el.Location.name,
+      location: el['Location.name'],
       photo: el.photo,
-      genre: el.Genres[0].name,
-      instrument: el.Instruments[0].name,
+      genre: el['Genre.name'],
+      instrument: el['Instruments.name'],
     }));
-    res.json({ musicians: result });
+    res.json({ musicians: foundUsers });
   } catch (error) {
     res.status(502).send('Everything is very bad');
   }
@@ -65,7 +66,7 @@ router.get('/:id', async (req, res) => {
         { model: Instrument, attributes: ['name'] },
       ],
     });
-    res.json({
+    return res.json({
       musician: {
         name: musicianInfo[0].name,
         phone: musicianInfo[0].phone,
@@ -77,7 +78,7 @@ router.get('/:id', async (req, res) => {
       },
     });
   } catch (error) {
-    res.status(503).send('Get-запрос не удался :(');
+    return res.status(503).send('Get-запрос не удался');
   }
 });
 

@@ -14,16 +14,24 @@ router.post('/', async (req, res) => {
     const toUserId = await User.findAll({ where: { name: toUser } });
     const toGroupId = await Group.findAll({ where: { name: toGroup } });
     const instrumentId = await Instrument.findAll({ where: { name: instrument } });
-    console.log(instrumentId[0].dataValues.id);
+
+    console.log('toGroupId --->', toGroupId[0].dataValues.ownerId);
+
+    let inviteType;
+    if (fromUserId[0].dataValues.id === toGroupId[0].dataValues.ownerId) {
+      inviteType = 'invite';
+    } else {
+      inviteType = 'request';
+    }
 
     const newInvite = await Invite.create({
       fromUserId: fromUserId[0].dataValues.id,
       toUserId: toUserId[0].dataValues.id,
       toGroupId: toGroupId[0].dataValues.id,
       instId: instrumentId[0].dataValues.id,
+      type: inviteType,
     });
 
-    console.log(newInvite);
 
     res.status(200).send('invite has been created');
   } catch (error) {
