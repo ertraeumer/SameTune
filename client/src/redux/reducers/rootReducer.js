@@ -4,6 +4,7 @@ import musiciansReducer from "./musiciansReducer";
 import filterDataReducer from "./filterDataReducer";
 import userReducer from "./userReducer";
 import authStatusReducer from "./authStatusReducer";
+import musicianReducer from "./musicianReducer";
 
 const rootReducer = combineReducers({
   filterData: filterDataReducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   bands: bandsReducer,
   musicians: musiciansReducer,
   authStatus: authStatusReducer,
+  musician: musicianReducer,
 })
 
 export default rootReducer;

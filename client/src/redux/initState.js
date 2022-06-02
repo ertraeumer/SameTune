@@ -4,6 +4,7 @@ const initState = () => ({
   bands: [],
   musicians: [],
   authStatus: '',
+  musician: '',
 });
 
 // const getInitState = () => {

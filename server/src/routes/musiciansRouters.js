@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 const { Op } = Sequelize;
 const router = require('express').Router();
 const {
-  User, Location, Genre, Instrument,
+  User, Location, Genre, Instrument, Group,
 } = require('../../db/models');
 
 router.post('/', async (req, res) => {
@@ -83,25 +83,72 @@ router.post('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const musicianInfo = await User.findAll({
-      where: { id },
-      include: [
-        { model: Location, attributes: ['name'] },
-        { model: Genre, attributes: ['name'] },
-        { model: Instrument, attributes: ['name'] },
-      ],
-    });
-    return res.json({
-      musician: {
-        name: musicianInfo[0].name,
-        phone: musicianInfo[0].phone,
-        profile: musicianInfo[0].profile,
-        photo: musicianInfo[0].photo,
-        location: musicianInfo[0].Location.name,
-        genre: musicianInfo[0].Genres[0].name,
-        instrument: musicianInfo[0].Instruments[0].name,
+    // const musicianInfo = await User.findAll({
+    //   where: { id },
+    //   include: [
+    //     { model: Location, attributes: ['name'] },
+    //     { model: Genre, attributes: ['name'] },
+    //     { model: Instrument, attributes: ['name'] },
+    //   ],
+    //   raw: true,
+    // });
+    // console.log(...musicianInfo);
+    // return res.json({
+    //   name: musicianInfo[0].name,
+    //   phone: musicianInfo[0].phone,
+    //   profile: musicianInfo[0].profile,
+    //   photo: musicianInfo[0].photo,
+    //   location: musicianInfo[0]['Location.name'],
+    //   genre: musicianInfo[0].Genres[0].name,
+    //   instrument: musicianInfo[0].Instruments[0].name,
+    // });
+    const currentUser = await User.findOne({ where: { id } });
+
+    const currentUserInfo = await User.findAll({
+
+      where: {
+        id,
       },
+
+      include: [
+        {
+          model: Location,
+          attributes: ['name'],
+        },
+        {
+          model: Genre,
+          attributes: ['name'],
+        },
+        {
+          model: Instrument,
+          attributes: ['name'],
+        },
+        {
+          model: Group,
+          attributes: ['name'],
+        },
+      ],
+      raw: true,
     });
+
+    const genres = [...new Set(currentUserInfo.map((el) => el['Genres.name']))];
+    const instruments = [...new Set(currentUserInfo.map((el) => el['Instruments.name']))];
+    const groups = [...new Set(currentUserInfo.map((el) => el['Groups.name']))];
+    const location = currentUserInfo[0]['Location.name'];
+
+    const userToReturn = {
+      ...currentUser.dataValues,
+      location,
+      genres,
+      instruments,
+      groups,
+    };
+
+    delete userToReturn.password;
+
+    console.log({ ...userToReturn });
+
+    return res.json({ ...userToReturn });
   } catch (error) {
     return res.status(503).send('Get-запрос не удался');
   }
