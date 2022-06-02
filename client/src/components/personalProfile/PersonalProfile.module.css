@@ -15,15 +15,19 @@
   width: 85%;
   border: 1px solid black;
   height: 70%;
+  margin-bottom: 50px;
+  border-radius: 5px;
 }
 
 .info {
   width: 60%;
-  border: 1px solid black;
+  border: 0px solid white;
   min-height: 96%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  margin-right: 50px;
+  margin-left: 100px
 }
 
 .title {
@@ -50,9 +54,10 @@
   position: absolute;
   right: 0;
   bottom: 0;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: gray;
   cursor: pointer;
+  margin-right: 30px;
 }
  .boxwithphotobutton {
    height: 96%;
@@ -60,6 +65,18 @@
    display: flex;
    flex-direction: column;
    align-items: center;
-   justify-content: space-evenly;
  }
+
+ .prop {
+  vertical-align: middle;
+  font-size: 22px;
+ }
+
+
+ .propInfo {
+   margin-top: 15px;
+   margin-right: 700px;
+   margin-left: 30px;
+   font-size: 18px;
+}
 
