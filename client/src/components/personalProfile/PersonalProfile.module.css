@@ -27,13 +27,13 @@
   flex-direction: column;
   justify-content: flex-start;
   margin-right: 50px;
-  margin-left: 100px
+  margin-left: 100px;
 }
 
 .title {
   height: 8%;
   text-align: center;
-  font-size: 2rem;
+  font-size: 2.7rem;
   font-weight: 600;
 }
 
@@ -69,14 +69,15 @@
 
  .prop {
   vertical-align: middle;
-  font-size: 22px;
+  font-size: 26px;
+  min-width: 290px;
  }
 
 
  .propInfo {
-   margin-top: 15px;
-   margin-right: 700px;
-   margin-left: 30px;
-   font-size: 18px;
+   margin-right: 100px;
+   font-size: 20px;
+   text-align: left;
+   min-width: 770px;
 }
 
