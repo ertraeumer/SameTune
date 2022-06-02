@@ -1,7 +1,5 @@
 import styles from './Profile.module.css';
 
-// const { id, type } = useParams(); band or person + id
-
 const Profile = () => {
   return (
     <div className={styles.profilePage}>

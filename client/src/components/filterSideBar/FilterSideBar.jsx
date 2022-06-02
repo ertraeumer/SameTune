@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBandsListThunk } from '../../redux/thunk/getbandsList.thunk';
+import { getMusiciansListThunk } from '../../redux/thunk/getMusiciansList.thunk';
 import styles from './FilterSideBar.module.css';
 
 const FilterSideBar = () => {
@@ -20,6 +21,10 @@ const FilterSideBar = () => {
     dispatch(getBandsListThunk(genre, location, instrument));
   }, [location, instrument, genre]);
 
+  useEffect(() => {
+    dispatch(getMusiciansListThunk(genre, location, instrument));
+  }, [location, instrument, genre]);
+
   return (
     <div className={styles.sidebarContainer}>
       <div className={styles.mleft}>
@@ -27,10 +32,9 @@ const FilterSideBar = () => {
         <div>
           <select value={location} onChange={(e) => {
               setLocation(e.target.value);
-              console.log(location);
           }}>
             <option></option>
-            {optionsLocation?.map(el => <option>{el.name}</option>)}
+            {optionsLocation?.map(el => <option key={Math.trunc(Math.random()*100000000)}>{el.name}</option>)}
           </select>
         </div>
       </div>
@@ -39,7 +43,7 @@ const FilterSideBar = () => {
         <div>
           <select value={instrument} onChange={(e) => setInstrument(e.target.value)}>
             <option></option>
-            {optionsInstrument?.map(el => <option>{el.name}</option>)}
+            {optionsInstrument?.map(el => <option key={Math.trunc(Math.random()*100000000)}>{el.name}</option>)}
           </select>
         </div>
       </div>
@@ -48,7 +52,7 @@ const FilterSideBar = () => {
         <div>
           <select value={genre} onChange={(e) => setGenre(e.target.value)}>
             <option></option>
-            {optionsGenre?.map(el => <option>{el.name}</option>)}
+            {optionsGenre?.map(el => <option key={Math.trunc(Math.random()*100000000)}>{el.name}</option>)}
           </select>
         </div>
       </div>

@@ -1,0 +1,65 @@
+.profilePage {
+  height: 100%;
+  width: 100%;
+}
+
+.profileContainer {
+  height: 90%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.photo {
+  width: 85%;
+  border: 1px solid black;
+  height: 70%;
+}
+
+.info {
+  width: 60%;
+  border: 1px solid black;
+  min-height: 96%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.title {
+  height: 8%;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.nameBox {
+  min-height: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.listBox {
+  min-height: 4rem;
+  position: relative;
+}
+
+.edit {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: 0.8rem;
+  color: gray;
+  cursor: pointer;
+}
+ .boxwithphotobutton {
+   height: 96%;
+   width: 40%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: space-evenly;
+ }
+

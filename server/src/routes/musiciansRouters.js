@@ -8,10 +8,8 @@ const {
 
 router.post('/', async (req, res) => {
   const { userLocation, userGenre, userInstrument } = req.body;
-
   try {
     const foundUsers = await User.findAll({
-
       include: [
         {
           model: Location,
@@ -35,20 +33,10 @@ router.post('/', async (req, res) => {
           },
         },
       ],
+      raw: true,
     });
-
-    const result = [];
-
-    foundUsers.map((el) => result.push({
-      name: el.name,
-      phone: el.phone,
-      profile: el.profile,
-      location: el.Location.name,
-      photo: el.photo,
-      genre: el.Genres[0].name,
-      instrument: el.Instruments[0].name,
-    }));
-    res.json({ musicians: result });
+    console.log(foundUsers);
+    res.json({ foundUsers });
   } catch (error) {
     res.status(502).send('Everything is very bad');
   }

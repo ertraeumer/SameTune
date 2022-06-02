@@ -6,6 +6,7 @@
   border-radius: 5px;
   height: 8rem;
   margin-bottom: 5%;
+  cursor: pointer;
 }
 
 .block {

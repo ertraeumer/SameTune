@@ -1,9 +1,12 @@
+import { useNavigate } from 'react-router-dom';
 import styles from './InfoCard.module.css';
 
 const InfoCard = ({ band }) => {
-  console.log(band);
+
+  const navigate = useNavigate();
+
   return (
-    <div className={styles.infocardContainer}>
+    <div className={styles.infocardContainer} onClick={() => navigate(`/band/${band.id}`)}>
       <div className={styles.block}>{band.photo}</div>
       <div className={styles.block}>
         <div>{band.name}</div>

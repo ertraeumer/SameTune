@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 import { getFilterDataThunk } from "../../redux/thunk/getFilterData.thunk";
+import BandProfile from "../bandProfile/BandProfile";
 import Homepage from "../homepage/Homepage";
 import NewBandForm from "../newBandForm/NewBandForm";
 import PersonalProfile from "../personalProfile/PersonalProfile";
@@ -23,8 +24,8 @@ const Main = () => {
         <Route path='/newband' element={<NewBandForm />} />
         <Route path="/home" element={<Homepage />}/>
         <Route path="/bands" element={<Searchlist searchvalue='Bands'/>}/>
+        <Route path="/band/:id" element={<BandProfile />}/>
         <Route path="/musicians" element={<Searchlist searchvalue='Musicians'/>}/>
-        <Route path="/profile/:type/:id" element={<Profile />}/>
         <Route path="/profile" element={<PersonalProfile />}/>
         <Route path="*" element={<Homepage />} />
       </Routes>
