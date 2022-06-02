@@ -11,8 +11,6 @@ const PersonalProfile = () => {
   const authUser = useSelector(state => state.authUser);
   const info = useSelector(state => state.filterData);
 
-  console.log(authUser);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

@@ -5,9 +5,8 @@ import MusicianInfoCard from '../musicianInfoCard/MusicianInfoCard';
 import styles from './Searchlist.module.css';
 
 const Searchlist = ({ searchvalue }) => {
-
   const infoBands = useSelector(state => state.bands);
-  const infoMusicians = useSelector(state => state.musicians);
+  const infoMusicians = useSelector(state => state.musicians).musiciansList.result;
   console.log(infoMusicians);
 
   return (
@@ -19,7 +18,7 @@ const Searchlist = ({ searchvalue }) => {
         {searchvalue === 'Bands' ? (
           infoBands.map((el) => <InfoCard key={el.id} band={el} />)
         ) : (
-          infoMusicians.map((el) => <MusicianInfoCard />))}
+          infoMusicians.map((el) => <MusicianInfoCard key={el.id} person={el}/>))}
       </div>
     </div>
   );

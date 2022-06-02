@@ -40,18 +40,6 @@ router.post('/', async (req, res) => {
       raw: true,
     });
 
-    const result = [];
-
-    returnGroup.map((el) => result.push({
-      name: el.name,
-      genre: el['Genre.name'],
-      location: el['Location.name'],
-      owner: el.ownerId,
-      photo: el.photo,
-      description: el.description,
-      requiredInstrument: el['Instruments.name'],
-    }));
-
     res.json({ group: returnGroup });
   } catch (error) {
     res.status(503).send('Не прокатило!');

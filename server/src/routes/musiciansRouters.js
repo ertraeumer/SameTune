@@ -22,21 +22,59 @@ router.post('/', async (req, res) => {
           model: Genre,
           attributes: ['name'],
           where: {
-            name: (userGenre || { [Op.like]: '%' }),
+            [Op.and]: [
+              {
+                name: {
+                  [Op.not]: null,
+                },
+              },
+              {
+                name: (userGenre || { [Op.like]: '%' }),
+              },
+            ],
           },
         },
         {
           model: Instrument,
           attributes: ['name'],
           where: {
-            name: (userInstrument || { [Op.like]: '%' }),
+            [Op.and]: [
+              {
+                name: {
+                  [Op.not]: null,
+                },
+              },
+              {
+                name: (userInstrument || { [Op.like]: '%' }),
+              },
+            ],
           },
         },
       ],
+      where: {
+        locationId: {
+          [Op.not]: null,
+        },
+      },
       raw: true,
     });
-    console.log(foundUsers);
-    res.json({ foundUsers });
+    const uniqueUserIds = [...new Set(foundUsers.map((el) => el.id))];
+    const result = uniqueUserIds.map((elem) => {
+      const oneUser = foundUsers.find((el) => el.id === elem);
+      const instruments = [];
+      foundUsers.forEach((el) => {
+        if (el.id === oneUser.id) instruments.push(el['Instruments.name']);
+      });
+      return {
+        id: oneUser.id,
+        name: oneUser.name,
+        location: oneUser['Location.name'],
+        genre: oneUser['Genres.name'],
+        instruments: [...new Set(instruments)],
+      };
+    });
+
+    res.json({ result });
   } catch (error) {
     res.status(502).send('Everything is very bad');
   }

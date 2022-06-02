@@ -18,8 +18,8 @@ export const getMusiciansListThunk = (genre, location, instrument) => {
   return async function(dispatch){
     try{
       const response = await fetch('http://localhost:3001/api/musicians', options);
-      const { filteredUsers } = await response.json();
-      dispatch(getMusiciansList(filteredUsers));
+      const result = await response.json();
+      dispatch(getMusiciansList(result));
     }
     catch(error){
       console.log(error.message);
