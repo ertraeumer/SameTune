@@ -66,6 +66,7 @@ router.get('/:id', async (req, res) => {
         { model: Instrument, attributes: ['name'] },
       ],
     });
+    console.log(musicianInfo);
     return res.json({
       musician: {
         name: musicianInfo[0].name,
