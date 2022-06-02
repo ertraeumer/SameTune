@@ -10,6 +10,7 @@ router.post('/', async (req, res) => {
   const { groupGenre, groupLocation, groupInstrument } = req.body;
   try {
     const returnGroup = await Group.findAll({
+
       include: [
         {
           model: Genre,

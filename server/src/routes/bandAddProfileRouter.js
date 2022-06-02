@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {
-  Group, Genre, Location, Instrument, GroupInstrument,
+  Group, Genre, Location, Instrument, GroupInstrument, UserGroup,
 } = require('../../db/models');
 const upload = require('../middlewares/multerMiddleWare');
 
@@ -10,6 +10,7 @@ router.post('/', upload.single('img'), async (req, res) => {
   } = req.body;
   // console.log(req.session);
   try {
+    console.log(req.body);
     const genreId = await Genre.findAll({ where: { name: genre } });
     const locationId = await Location.findAll({ where: { name: location } });
     const instrumentId = await Instrument.findAll({ where: { name: instrument } });
@@ -31,7 +32,10 @@ router.post('/', upload.single('img'), async (req, res) => {
       await GroupInstrument.create({
         instrumentId: instrumentId[0].dataValues.id,
         groupId: newGroup.dataValues.id,
-
+      });
+      await UserGroup.create({
+        groupId: newGroup.dataValues.id,
+        userId: req.session.user.id,
       });
     }
 
