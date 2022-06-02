@@ -44,7 +44,6 @@ const signIn = async (req, res) => {
   if (password && email) {
     try {
       const currentUser = await User.findOne({ where: { email } });
-      console.log(currentUser);
       const compareResult = await bcrypt.compare(password, currentUser.password);
       if (currentUser && compareResult) {
         req.session.user = {
@@ -73,23 +72,27 @@ const signIn = async (req, res) => {
               },
               {
                 model: Group,
-                attributes: ['name'],
+                attributes: ['name', 'id'],
               },
             ],
             raw: true,
           });
-
           const genres = [...new Set(currentUserInfo.map((el) => el['Genres.name']))];
           const instruments = [...new Set(currentUserInfo.map((el) => el['Instruments.name']))];
           const groups = [...new Set(currentUserInfo.map((el) => el['Groups.name']))];
+          const groupsIds = [...new Set(currentUserInfo.map((el) => el['Groups.id']))];
           const location = currentUserInfo[0]['Location.name'];
+
+          const resGroups = [];
+
+          groups.forEach((el, i) => resGroups.push({ name: el, id: groupsIds[i] }));
 
           const userToReturn = {
             ...currentUser.dataValues,
             location,
             genres,
             instruments,
-            groups,
+            groups: resGroups,
           };
 
           delete userToReturn.password;

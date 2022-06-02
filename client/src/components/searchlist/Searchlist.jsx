@@ -7,7 +7,6 @@ import styles from './Searchlist.module.css';
 const Searchlist = ({ searchvalue }) => {
   const infoBands = useSelector(state => state.bands);
   const infoMusicians = useSelector(state => state.musicians).musiciansList.result;
-  console.log(infoMusicians);
 
   return (
     <div className={styles.searchlistContainer}>

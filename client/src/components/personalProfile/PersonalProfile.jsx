@@ -135,7 +135,7 @@ const PersonalProfile = () => {
             <ListGroup.Item style={{ paddingTop: 0, paddingBottom: 0 }}>
               <div className={styles.nameBox}>
                   <div className={styles.prop}><b>My Bands:</b></div>
-                  <div className={styles.propInfo}>{authUser?.groups || 'No Information Provided'}</div>      
+                  <div className={styles.propInfo}>{authUser?.groups ? authUser.groups.map((el) => <div style={{ cursor: 'pointer' }}key={el.id} onClick={() => navigate(`/band/${el.id}`)}>{el.name}</div>) : 'No Information Provided'}</div>      
                   <div className={styles.edit}></div>
               </div>
             </ListGroup.Item>
