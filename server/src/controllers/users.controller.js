@@ -164,7 +164,12 @@ const getUser = async (req, res) => {
     const genres = [...new Set(currentUserInfo.map((el) => el['Genres.name']))];
     const instruments = [...new Set(currentUserInfo.map((el) => el['Instruments.name']))];
     const groups = [...new Set(currentUserInfo.map((el) => el['Groups.name']))];
+    const groupsIds = [...new Set(currentUserInfo.map((el) => el['Groups.id']))];
     const location = currentUserInfo[0]['Location.name'];
+
+    const resGroups = [];
+
+    groups.forEach((el, i) => resGroups.push({ name: el, id: groupsIds[i] }));
 
     const gotUser = {
       id: currentUserInfo[0].id,
@@ -174,7 +179,7 @@ const getUser = async (req, res) => {
       profile: currentUserInfo[0].profile,
       genres,
       instruments,
-      groups,
+      groups: resGroups,
       location,
     };
 

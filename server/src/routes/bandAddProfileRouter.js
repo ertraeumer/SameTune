@@ -14,8 +14,6 @@ router.post('/', upload.single('img'), async (req, res) => {
     const locationId = await Location.findAll({ where: { name: location } });
     const instrumentId = await Instrument.findAll({ where: { name: instrument } });
 
-    console.log('req.session-->', req.session);
-
     // if (req.file?.originalname) {
     const newGroup = await Group.create({
       name,

@@ -8,7 +8,7 @@ const MusicianInfoCard = ({ person }) => {
 
   return (
     <Card onClick={() => navigate(`/profile/${person.id}`)} bg="dark" text="white" style={{cursor: 'pointer', width: '70rem', marginBottom: '30px', flexDirection: 'unset'}}>
-        <Card.Img style={{maxWidth: "300px"}} variant="left" src="https://vanyaland.com/wp-content/uploads/2017/05/Rock-Cats.jpg" />
+        <Card.Img style={{maxWidth: "300px"}} variant="left" src="https://www.meme-arsenal.com/memes/38f3cb4b83f04a1ba6cfa700ce9a8603.jpg" />
         <Card.Body style={{marginLeft: '20px'}}>
           <Card.Title style={{fontSize: '30px'}}>{person.name}</Card.Title>
           <Card.Text>

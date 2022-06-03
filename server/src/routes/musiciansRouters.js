@@ -146,8 +146,6 @@ router.get('/:id', async (req, res) => {
 
     delete userToReturn.password;
 
-    console.log({ ...userToReturn });
-
     return res.json({ ...userToReturn });
   } catch (error) {
     return res.status(503).send('Get-запрос не удался');
