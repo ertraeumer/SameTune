@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const Sequelize = require('sequelize');
 const {
-  Group, Location, Genre, User, Instrument,
+  Group, Location, Genre, User, Instrument, UserGroup,
 } = require('../../db/models');
 
 const { Op } = Sequelize;
@@ -10,6 +10,7 @@ router.post('/', async (req, res) => {
   const { groupGenre, groupLocation, groupInstrument } = req.body;
   try {
     const returnGroup = await Group.findAll({
+
       include: [
         {
           model: Genre,
@@ -48,9 +49,9 @@ router.post('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
-
+  console.log(req.params);
   try {
-    const groupInfo = await Group.findAll({
+    const groupInfo = await Group.findOne({
       where: { id },
       include: [
         { model: Location, attributes: ['name'] },
@@ -60,18 +61,15 @@ router.get('/:id', async (req, res) => {
       ],
     });
 
+    console.log('groupInfo---->', groupInfo.Users);
+
     res.json({
       group: {
-        name: groupInfo[0].name,
-        genre: groupInfo[0].Genre.name,
-        location: groupInfo[0].Location.name,
-        owner: groupInfo[0].Users[0].name,
-        photo: groupInfo[0].photo,
-        description: groupInfo[0].description,
-        requiredInstrument: groupInfo[0].Instruments[0].name,
+        groupInfo,
       },
     });
   } catch (error) {
+    console.log(error);
     res.status(503).send('Не прошёл твой гет-запрос, фраерок');
   }
 });
