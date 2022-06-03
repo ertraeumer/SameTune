@@ -34,6 +34,7 @@ router.post('/', upload.single('img'), async (req, res) => {
     }
 
     const returnGroup = {
+      id: newGroup.id,
       name,
       description,
       photo: `images/${req.file?.originalname}`,

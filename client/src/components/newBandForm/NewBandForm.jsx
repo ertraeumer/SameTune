@@ -29,11 +29,11 @@ const NewBandForm = () => {
         <h1 className={styles.title}>Create New Band</h1>
         <Form.Group className="mb-3" style={{ width: '40%', margin: '0 auto' }}>
           <Form.Label>Band Name</Form.Label>
-          <Form.Control placeholder="Band Name" value={description} onChange={(e) => setDescription(e.target.value)} />
+          <Form.Control placeholder="Band Name" value={name} onChange={(e) => setName(e.target.value)} />
         </Form.Group>
         <Form.Group className="mb-3" style={{ width: '40%', margin: '0 auto' }} controlId="exampleForm.ControlTextarea1">
           <Form.Label>Description</Form.Label>
-          <Form.Control as="textarea" rows={3} />
+          <Form.Control as="textarea" rows={3} placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
         </Form.Group>
         <Form.Group className="mb-3" style={{ width: '40%', margin: '0 auto' }}>
           <Form.Label>Location</Form.Label>

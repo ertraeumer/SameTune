@@ -134,14 +134,19 @@ router.get('/:id', async (req, res) => {
     const genres = [...new Set(currentUserInfo.map((el) => el['Genres.name']))];
     const instruments = [...new Set(currentUserInfo.map((el) => el['Instruments.name']))];
     const groups = [...new Set(currentUserInfo.map((el) => el['Groups.name']))];
+    const groupsIds = [...new Set(currentUserInfo.map((el) => el['Groups.id']))];
     const location = currentUserInfo[0]['Location.name'];
+
+    const resGroups = [];
+
+    groups.forEach((el, i) => resGroups.push({ name: el, id: groupsIds[i] }));
 
     const userToReturn = {
       ...currentUser.dataValues,
       location,
       genres,
       instruments,
-      groups,
+      groups: resGroups,
     };
 
     delete userToReturn.password;
