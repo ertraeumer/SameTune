@@ -1,28 +1,74 @@
-.card {
-  height: 80%;
-  width: 80%;
-  border: 1px solid black;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
+.newBandPage {
+  height: 100%;
+  width: 100%;
 }
 
 .container {
-  height: 100%;
+  height: 90%;
   width: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
 }
 
-.title {
-  font-size: 2rem;
+.info {
+  width: 60%;
+  border: 0px solid white;
+  min-height: 96%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-right: 50px;
+  margin-left: 100px;
 }
 
-.form {
-  height: 80%;
-  width: 80%;
-  border: 1px solid black;
+.title {
+  height: 8%;
+  text-align: center;
+  font-size: 2.7rem;
+  font-weight: 600;
+}
+
+.nameBox {
+  min-height: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.listBox {
+  min-height: 4rem;
+  position: relative;
+}
+
+.edit {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: 0.9rem;
+  color: gray;
+  cursor: pointer;
+  margin-right: 30px;
+}
+ .boxwithphotobutton {
+   height: 96%;
+   width: 40%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+ }
+
+ .prop {
+  vertical-align: middle;
+  font-size: 26px;
+  min-width: 290px;
+ }
+
+
+ .propInfo {
+   margin-right: 100px;
+   font-size: 20px;
+   text-align: left;
+   min-width: 60%;
 }

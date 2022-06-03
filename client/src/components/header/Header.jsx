@@ -19,7 +19,7 @@ const Header = () => {
 
   return (
     <div className={styles.headerContainer}>
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" style={{ padding: 0, height: '100%'}}>
+      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" style={{ padding: 0, height: '100%', backgroundColor: 'pink'}}>
         <Container>
           <Navbar.Brand style={{cursor: 'pointer'}} onClick={() => navigate('/')}>SameTune</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
