@@ -7,6 +7,8 @@ const BandProfile = () => {
 
   const { id } = useParams();
   const band = useSelector(state => state.bands).filter((el) => (el.id === +id))[0];
+  const authUser = useSelector(state => state.authUser);
+
   const joinGroupHandler = () => {
 
   };
@@ -17,7 +19,7 @@ const BandProfile = () => {
       <div className={styles.profileContainer}>
         <div className={styles.boxwithphotobutton}>
           <div className={styles.photo}>photo</div>
-          <div><Button variant='dark' style={{ fontSize: '2rem' }} onClick={joinGroupHandler}>Join</Button></div>
+          {band.ownerId !== authUser.id ? <div><Button variant='dark' style={{ fontSize: '2rem' }} onClick={joinGroupHandler}>Join</Button></div> : <div><b>You are owner of this band</b></div>}
         </div>
         <div className={styles.info}>
           <ListGroup>
