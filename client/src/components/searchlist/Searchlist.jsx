@@ -9,10 +9,9 @@ const Searchlist = ({ searchvalue }) => {
   const infoMusicians = useSelector(state => state.musicians).musiciansList.result;
 
   return (
-    <div className={styles.searchlistContainer}>
+    <div className={styles.container}>
       <FilterSideBar />
       <div className={styles.text}>Searchlist of {searchvalue}</div>
-      <div className={styles.searchline}><input className={styles.input} type="text" placeholder='Looking for someone exact?' /></div>
       <div className={styles.list}>
         {searchvalue === 'Bands' ? (
           infoBands.map((el) => <InfoCard key={el.id} band={el} />)

@@ -15,33 +15,49 @@ const BandProfile = () => {
 
   return (
     <div className={styles.profilePage}>
-      <h1 className={styles.title}>{band.name} profile page</h1>
-      <div className={styles.profileContainer}>
-        <div className={styles.boxwithphotobutton}>
-          <div className={styles.photo}>photo</div>
-          {band.ownerId !== authUser.id ? <div><Button variant='dark' style={{ fontSize: '2rem' }} onClick={joinGroupHandler}>Join</Button></div> : <div><b>You are owner of this band</b></div>}
-        </div>
-        <div className={styles.info}>
-          <ListGroup>
-            <ListGroup.Item style={{ paddingTop: 0, paddingBottom: 0 }}>
-              Location: {band['Location.name']}
-            </ListGroup.Item>
-            <ListGroup.Item style={{ paddingTop: 0, paddingBottom: 0 }}>
-              Instrument required: {band['Instruments.name']}
-            </ListGroup.Item>
-            <ListGroup.Item style={{ paddingTop: 0, paddingBottom: 0 }}>
-              Genre: {band['Genre.name']}
-            </ListGroup.Item>
-            <ListGroup.Item style={{ paddingTop: 0, paddingBottom: 0 }}>
-              About Us: {band.description}
-            </ListGroup.Item>
-            <ListGroup.Item style={{ paddingTop: 0, paddingBottom: 0 }}>
-              Participants: {/* Participants: {band.participants} */}
-            </ListGroup.Item>
-          </ListGroup>
-        </div>
+    <h1 className={styles.title}>{band.name} Profile page</h1>
+    <div className={styles.profileContainer}>
+      <div className={styles.boxwithphotobutton}>
+        <div className={styles.photo}>photo</div>
+        <div></div>
+      </div>
+      <div className={styles.info}>
+        <ListGroup >
+          <ListGroup.Item style={{ paddingTop: 0, paddingBottom: 0 }}>
+            <div className={styles.nameBox}>
+                <div className={styles.prop}><b>Genre:</b></div>
+                <div className={styles.propInfo}>{band['Genre.name']}</div>
+            </div>
+          </ListGroup.Item>
+          <ListGroup.Item style={{ paddingTop: 0, paddingBottom: 0 }}>
+            <div className={styles.nameBox}>
+                <div className={styles.prop}><b>Location:</b></div>
+                <div className={styles.propInfo}>{band['Location.name']}</div>
+            </div>
+          </ListGroup.Item>
+          <ListGroup.Item style={{ paddingTop: 0, paddingBottom: 0 }}>
+            <div className={styles.nameBox}>
+                <div className={styles.prop}><b>Instrument Required:</b></div>
+                <div className={styles.propInfo}>{band['Instruments.name']}</div> 
+            </div>
+          </ListGroup.Item>
+          <ListGroup.Item style={{ paddingTop: 0, paddingBottom: 0 }}>
+            <div className={styles.nameBox}>
+                <div className={styles.prop}><b>About Us:</b></div>
+                <div className={styles.propInfo}>{band.description}</div> 
+            </div>
+          </ListGroup.Item>
+          <ListGroup.Item style={{ paddingTop: 0, paddingBottom: 0 }}>
+            <div className={styles.nameBox}>
+                <div className={styles.prop}><b>Participants:</b></div>
+                <div className={styles.propInfo}>{band.participants}</div> 
+            </div>
+          </ListGroup.Item>
+        </ListGroup>
+        <div style={{textAlign: 'center'}}><Button variant='dark' style={{ fontSize: '2rem', margin: '50px 0'}} onClick={() => console.log('123')}>Join The Band</Button></div>
       </div>
     </div>
+  </div>
   );
 }
 

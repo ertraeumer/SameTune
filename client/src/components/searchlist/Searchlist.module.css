@@ -2,6 +2,10 @@
   margin-top: 2%;
 }
 
+.container {
+  
+}
+
 .input {
   margin-left: 20%;
   margin-bottom: 3%;
@@ -13,6 +17,7 @@
 .text {
   padding-left: 20%;
   font-size: 4rem;
+  margin-bottom: 50px;
 }
 
 .list {

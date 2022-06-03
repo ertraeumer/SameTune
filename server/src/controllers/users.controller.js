@@ -1,11 +1,12 @@
 const {
-  User, Genre, Instrument, Group, Location,
+  User, Genre, Instrument, Group, Location, UserGenre,
 } = require('../../db/models');
 
 const editUser = async (req, res) => {
   let updatedFields = Object.entries(req.body).filter((el) => el[1]);
   if (updatedFields.length) {
     updatedFields = Object.fromEntries(updatedFields);
+    console.log(updatedFields);
     let updatedUser;
     try {
       if ('name' in updatedFields || 'profile' in updatedFields || 'phone' in updatedFields) {
@@ -31,6 +32,28 @@ const editUser = async (req, res) => {
           },
           returning: true,
           plain: true,
+          raw: true,
+        });
+      }
+
+      if ('genres' in updatedFields) {
+        const newGenre = await Genre.findOne({
+          where: {
+            name: updatedFields.genres,
+          },
+        });
+        await UserGenre.update({ genreId: newGenre.id }, {
+          where: {
+            id: req.session.user.id,
+          },
+          returning: true,
+          plain: true,
+          raw: true,
+        });
+        updatedUser = await User.findOne({
+          where: {
+            id: req.session.user.id,
+          },
           raw: true,
         });
       }
@@ -65,13 +88,18 @@ const editUser = async (req, res) => {
       const genres = [...new Set(currentUserInfo.map((el) => el['Genres.name']))];
       const instruments = [...new Set(currentUserInfo.map((el) => el['Instruments.name']))];
       const groups = [...new Set(currentUserInfo.map((el) => el['Groups.name']))];
+      const groupsIds = [...new Set(currentUserInfo.map((el) => el['Groups.id']))];
       const location = currentUserInfo[0]['Location.name'];
+
+      const resGroups = [];
+
+      groups.forEach((el, i) => resGroups.push({ name: el, id: groupsIds[i] }));
 
       const userToReturn = {
         ...updatedUser,
         genres,
         instruments,
-        groups,
+        groups: resGroups,
         location,
       };
 
